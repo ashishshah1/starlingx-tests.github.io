@@ -17,6 +17,6 @@ tagline: Results of StarlingX test executions
 
 | Configuration | Test suite           | Status |
 |---------------|----------------------|--------|
-| Duplex        | [Provision Containers](results/duplex/20190401122908_Provision-Containers/report.html) | Pass   |
-| Duplex        | [Sanity Tests](results/duplex/20190401131152_Sanity-Test/report.html)  | Pass   |
+| Duplex        | [Provision Containers](results/duplex/20190401122908_Provision-Containers/report.html) | Fail   |
+| Duplex        | [Sanity Tests](results/duplex/20190401131152_Sanity-Test/report.html)  | Fail  |
 
