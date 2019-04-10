@@ -1,0 +1,593 @@
+==============================================================================
+20190402 06:37:25.824 - INFO - + START SUITE: Provision-Containers [ ]
+==============================================================================
+20190402 06:37:25.824 - INFO - +- START SETUP: BuiltIn.Run Keywords [ Utils.Stx Suite Setup | provisioning.Assign Data Interfaces ]
+20190402 06:37:25.824 - INFO - +-- START KW: Utils.Stx Suite Setup [ ]
+20190402 06:37:25.825 - INFO - +--- START KW: Utils.Open Master Controller Connection [ ]
+20190402 06:37:25.825 - INFO - +---- START KW: Utils.Connect to Controller Node [ ${CONFIG.credentials.STX_DEPLOY_USER_NAME} | ${CONFIG.credentials.STX_DEPLOY_USER_PSWD} | ${CONFIG.general.IP_UNIT_0_ADDRESS} ]
+20190402 06:37:25.825 - INFO - +----- START KW: SSHLibrary.Open Connection [ ${ip_address} prompt=${prompt} | timeout=${timeout} ]
+20190402 06:37:25.826 - INFO - ${controller_connection} = 1
+20190402 06:37:25.826 - INFO - +----- END KW: SSHLibrary.Open Connection (1)
+20190402 06:37:25.826 - INFO - +----- START KW: Utils.Flexible_SSH_Login [ ${user} | ${password} ]
+20190402 06:37:25.826 - INFO - +------ START KW: BuiltIn.Get Length [ ${password} ]
+20190402 06:37:25.826 - INFO - Length is 10
+20190402 06:37:25.826 - INFO - ${pwd_length} = 10
+20190402 06:37:25.826 - INFO - +------ END KW: BuiltIn.Get Length (0)
+20190402 06:37:25.826 - INFO - +------ START KW: BuiltIn.Run Keyword And Return If [ ${pwd_length} > 0 | SSHLibrary.Login | ${user} | ${password} | delay=${delay} ]
+20190402 06:37:25.827 - INFO - +------- START KW: SSHLibrary.Login [ ${user} | ${password} | delay=${delay} ]
+20190402 06:37:25.827 - INFO - Logging into '192.168.200.76 prompt=$:22' as 'wrsroot'.
+20190402 06:37:26.933 - INFO - Read output: Last login: Tue Apr  2 12:07:09 2019 from 192.168.200.60
+/etc/motd.d/00-header:
+
+[H[2J
+WARNING: Unauthorized access to this system is forbidden and will be
+prosecuted by law. By accessing this system, you agree that your
+actions may be monitored if unauthorized usage is suspected.
+
+controller-0:~$
+20190402 06:37:26.933 - INFO - /home/mgperezi/duplex/stx-test-suite/Maria/lib/python2.7/site-packages/paramiko/kex_ecdh_nist.py:39: CryptographyDeprecationWarning: encode_point has been deprecated on EllipticCurvePublicNumbers and will be removed in a future version. Please use EllipticCurvePublicKey.public_bytes to obtain both compressed and uncompressed point encoding.
+  m.add_string(self.Q_C.public_numbers().encode_point())
+/home/mgperezi/duplex/stx-test-suite/Maria/lib/python2.7/site-packages/paramiko/kex_ecdh_nist.py:96: CryptographyDeprecationWarning: Support for unsafe construction of public numbers from encoded data will be removed in a future version. Please use EllipticCurvePublicKey.from_encoded_point
+  self.curve, Q_S_bytes
+/home/mgperezi/duplex/stx-test-suite/Maria/lib/python2.7/site-packages/paramiko/kex_ecdh_nist.py:111: CryptographyDeprecationWarning: encode_point has been deprecated on EllipticCurvePublicNumbers and will be removed in a future version. Please use EllipticCurvePublicKey.public_bytes to obtain both compressed and uncompressed point encoding.
+  hm.add_string(self.Q_C.public_numbers().encode_point())
+20190402 06:37:26.934 - INFO - +------- END KW: SSHLibrary.Login (1107)
+20190402 06:37:26.934 - INFO - Returning from the enclosing user keyword.
+20190402 06:37:26.935 - INFO - +------ END KW: BuiltIn.Run Keyword And Return If (1108)
+20190402 06:37:26.935 - INFO - +----- END KW: Utils.Flexible_SSH_Login (1109)
+20190402 06:37:26.936 - INFO - ${master_controller_connection} = 1
+20190402 06:37:26.936 - INFO - +---- END KW: Utils.Connect to Controller Node (1111)
+20190402 06:37:26.937 - INFO - +---- START KW: BuiltIn.Set Suite Variable [ ${master_controller_connection} ]
+20190402 06:37:26.937 - INFO - ${master_controller_connection} = 1
+20190402 06:37:26.938 - INFO - +---- END KW: BuiltIn.Set Suite Variable (1)
+20190402 06:37:26.938 - INFO - +---- START KW: BuiltIn.Log [ ${master_controller_connection} ]
+20190402 06:37:26.939 - INFO - 1
+20190402 06:37:26.939 - INFO - +---- END KW: BuiltIn.Log (1)
+20190402 06:37:26.939 - INFO - +--- END KW: Utils.Open Master Controller Connection (1114)
+20190402 06:37:26.940 - INFO - +--- START KW: Utils.Set Env Vars From Openrc [ ]
+20190402 06:37:26.941 - INFO - +---- START KW: Utils.Run Command [ source /etc/platform/openrc | True ]
+20190402 06:37:26.942 - INFO - +----- START KW: SSHLibrary.Set Client Configuration [ timeout=${timeout} | prompt=$ ]
+20190402 06:37:26.943 - INFO - +----- END KW: SSHLibrary.Set Client Configuration (1)
+20190402 06:37:26.944 - INFO - +----- START KW: Utils.Create Empy Result Dictionary [ ]
+20190402 06:37:26.944 - INFO - +------ START KW: BuiltIn.Create Dictionary [ stdout=${EMPTY} ]
+20190402 06:37:26.946 - INFO - &{result_dict} = { stdout= }
+20190402 06:37:26.946 - INFO - +------ END KW: BuiltIn.Create Dictionary (2)
+20190402 06:37:26.947 - INFO - +------ START KW: Collections.Set To Dictionary [ ${result_dict} | stderr=${EMPTY} ]
+20190402 06:37:26.948 - INFO - +------ END KW: Collections.Set To Dictionary (1)
+20190402 06:37:26.948 - INFO - +------ START KW: Collections.Set To Dictionary [ ${result_dict} | rc=${EMPTY} ]
+20190402 06:37:26.949 - INFO - +------ END KW: Collections.Set To Dictionary (1)
+20190402 06:37:26.950 - INFO - &{result} = { stdout= | stderr= | rc= }
+20190402 06:37:26.950 - INFO - +----- END KW: Utils.Create Empy Result Dictionary (6)
+20190402 06:37:26.950 - INFO - +----- START KW: SSHLibrary.Read [ ]
+20190402 06:37:26.951 - INFO - +----- END KW: SSHLibrary.Read (1)
+20190402 06:37:26.951 - INFO - +----- START KW: SSHLibrary.Write [ ${cmd} ]
+20190402 06:37:26.962 - INFO - source /etc/platform/openrc
+20190402 06:37:26.963 - INFO - +----- END KW: SSHLibrary.Write (12)
+20190402 06:37:26.963 - INFO - +----- START KW: SSHLibrary.Read Until Prompt [ ]
+20190402 06:37:27.413 - INFO - [wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:27.413 - INFO - ${output} = [wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:27.413 - INFO - +----- END KW: SSHLibrary.Read Until Prompt (450)
+20190402 06:37:27.413 - INFO - +----- START KW: Utils.Remove Prompt Line [ ${output} ]
+20190402 06:37:27.413 - INFO - +------ START KW: String.Get Line [ ${output} | -1 ]
+20190402 06:37:27.414 - INFO - ${line_to_remove} = [wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:27.414 - INFO - +------ END KW: String.Get Line (1)
+20190402 06:37:27.414 - INFO - +------ START KW: String.Remove String [ ${output} | ${line_to_remove} ]
+20190402 06:37:27.414 - INFO - ${clean_out} =
+20190402 06:37:27.414 - INFO - +------ END KW: String.Remove String (0)
+20190402 06:37:27.414 - INFO - ${output} =
+20190402 06:37:27.414 - INFO - +----- END KW: Utils.Remove Prompt Line (1)
+20190402 06:37:27.414 - INFO - +----- START KW: Utils.Get Return Code [ ]
+20190402 06:37:27.414 - INFO - +------ START KW: SSHLibrary.Write [ echo $? ]
+20190402 06:37:27.416 - INFO - echo $?
+20190402 06:37:27.416 - INFO - +------ END KW: SSHLibrary.Write (2)
+20190402 06:37:27.416 - INFO - +------ START KW: SSHLibrary.Read Until Regexp [ [0-9]+ ]
+20190402 06:37:27.416 - INFO - 0
+20190402 06:37:27.416 - INFO - ${rc} = 0
+20190402 06:37:27.417 - INFO - +------ END KW: SSHLibrary.Read Until Regexp (0)
+20190402 06:37:27.417 - INFO - +------ START KW: BuiltIn.Log [ ${rc} ]
+20190402 06:37:27.417 - INFO - 0
+20190402 06:37:27.417 - INFO - +------ END KW: BuiltIn.Log (0)
+20190402 06:37:27.417 - INFO - ${rc} = 0
+20190402 06:37:27.417 - INFO - +----- END KW: Utils.Get Return Code (3)
+20190402 06:37:27.417 - INFO - +----- START KW: BuiltIn.Run Keyword If [ ${rc} == 0 | Set To Dictionary | ${result} | stdout=${output.strip()} | ELSE IF | ${fail_if_error} == True | FAIL | ${output} | ELSE | Set To Dictionary | ${result} | stderr=${output} ]
+20190402 06:37:27.418 - INFO - +------ START KW: Collections.Set To Dictionary [ ${result} | stdout=${output.strip()} ]
+20190402 06:37:27.418 - INFO - +------ END KW: Collections.Set To Dictionary (0)
+20190402 06:37:27.418 - INFO - +----- END KW: BuiltIn.Run Keyword If (1)
+20190402 06:37:27.418 - INFO - +----- START KW: Collections.Set To Dictionary [ ${result} | rc=${rc} ]
+20190402 06:37:27.418 - INFO - +----- END KW: Collections.Set To Dictionary (0)
+20190402 06:37:27.418 - INFO - +----- START KW: Collections.Log Dictionary [ ${result} ]
+20190402 06:37:27.418 - INFO - Dictionary size is 3 and it contains following items:
+rc: 0
+stderr: 
+stdout:
+20190402 06:37:27.418 - INFO - +----- END KW: Collections.Log Dictionary (0)
+20190402 06:37:27.419 - INFO - +---- END KW: Utils.Run Command (478)
+20190402 06:37:27.419 - INFO - +--- END KW: Utils.Set Env Vars From Openrc (479)
+20190402 06:37:27.419 - INFO - +-- END KW: Utils.Stx Suite Setup (1595)
+20190402 06:37:27.419 - INFO - +-- START KW: provisioning.Assign Data Interfaces [ ]
+20190402 06:37:27.419 - INFO - +--- START KW: BuiltIn.Run Keyword If [ '${ENVIRONMENT}'=='virtual' | Create List | eth1000 | eth1001 | ELSE | Create List | enp24s0f0 | enp24s0f1 ]
+20190402 06:37:27.419 - INFO - +---- START KW: BuiltIn.Create List [ enp24s0f0 | enp24s0f1 ]
+20190402 06:37:27.420 - INFO - +---- END KW: BuiltIn.Create List (1)
+20190402 06:37:27.420 - INFO - @{data_interfaces} = [ enp24s0f0 | enp24s0f1 ]
+20190402 06:37:27.420 - INFO - +--- END KW: BuiltIn.Run Keyword If (1)
+20190402 06:37:27.420 - INFO - +--- START KW: Collections.Get From List [ ${data_interfaces} | 0 ]
+20190402 06:37:27.420 - INFO - ${data0if} = enp24s0f0
+20190402 06:37:27.420 - INFO - +--- END KW: Collections.Get From List (0)
+20190402 06:37:27.420 - INFO - +--- START KW: Collections.Get From List [ ${data_interfaces} | 1 ]
+20190402 06:37:27.420 - INFO - ${data1if} = enp24s0f1
+20190402 06:37:27.421 - INFO - +--- END KW: Collections.Get From List (1)
+20190402 06:37:27.421 - INFO - +--- START KW: BuiltIn.Set Suite Variable [ ${data0if} ]
+20190402 06:37:27.421 - INFO - ${data0if} = enp24s0f0
+20190402 06:37:27.421 - INFO - +--- END KW: BuiltIn.Set Suite Variable (0)
+20190402 06:37:27.421 - INFO - +--- START KW: BuiltIn.Set Suite Variable [ ${data1if} ]
+20190402 06:37:27.421 - INFO - ${data1if} = enp24s0f1
+20190402 06:37:27.421 - INFO - +--- END KW: BuiltIn.Set Suite Variable (0)
+20190402 06:37:27.421 - INFO - +-- END KW: provisioning.Assign Data Interfaces (2)
+20190402 06:37:27.421 - INFO - +- END SETUP: BuiltIn.Run Keywords (1597)
+------------------------------------------------------------------------------
+20190402 06:37:27.422 - INFO - +- START TEST: Provisioning Duplex System [ ]
+------------------------------------------------------------------------------
+20190402 06:37:27.422 - INFO - +-- START KW: Utils.Set NTP Server [ ]
+20190402 06:37:27.422 - INFO - +--- START KW: BuiltIn.Set Variable [ 0.pool.ntp.org,1.pool.ntp.org ]
+20190402 06:37:27.422 - INFO - ${ntp_servers} = 0.pool.ntp.org,1.pool.ntp.org
+20190402 06:37:27.422 - INFO - +--- END KW: BuiltIn.Set Variable (0)
+20190402 06:37:27.422 - INFO - +--- START KW: Utils.Run Command [ system ntp-modify ntpservers=${ntp_servers} ]
+20190402 06:37:27.423 - INFO - +---- START KW: SSHLibrary.Set Client Configuration [ timeout=${timeout} | prompt=$ ]
+20190402 06:37:27.423 - INFO - +---- END KW: SSHLibrary.Set Client Configuration (0)
+20190402 06:37:27.423 - INFO - +---- START KW: Utils.Create Empy Result Dictionary [ ]
+20190402 06:37:27.423 - INFO - +----- START KW: BuiltIn.Create Dictionary [ stdout=${EMPTY} ]
+20190402 06:37:27.424 - INFO - &{result_dict} = { stdout= }
+20190402 06:37:27.424 - INFO - +----- END KW: BuiltIn.Create Dictionary (1)
+20190402 06:37:27.424 - INFO - +----- START KW: Collections.Set To Dictionary [ ${result_dict} | stderr=${EMPTY} ]
+20190402 06:37:27.424 - INFO - +----- END KW: Collections.Set To Dictionary (0)
+20190402 06:37:27.424 - INFO - +----- START KW: Collections.Set To Dictionary [ ${result_dict} | rc=${EMPTY} ]
+20190402 06:37:27.424 - INFO - +----- END KW: Collections.Set To Dictionary (0)
+20190402 06:37:27.425 - INFO - &{result} = { stdout= | stderr= | rc= }
+20190402 06:37:27.425 - INFO - +---- END KW: Utils.Create Empy Result Dictionary (2)
+20190402 06:37:27.425 - INFO - +---- START KW: SSHLibrary.Read [ ]
+20190402 06:37:27.425 - INFO - [wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:27.425 - INFO - +---- END KW: SSHLibrary.Read (0)
+20190402 06:37:27.425 - INFO - +---- START KW: SSHLibrary.Write [ ${cmd} ]
+20190402 06:37:27.434 - INFO - system ntp-modify ntpservers=0.pool.nt p.org,1.pool.ntp.org
+20190402 06:37:27.434 - INFO - +---- END KW: SSHLibrary.Write (9)
+20190402 06:37:27.434 - INFO - +---- START KW: SSHLibrary.Read Until Prompt [ ]
+20190402 06:37:28.502 - INFO - +--------------+--------------------------------------+
+| Property     | Value                                |
++--------------+--------------------------------------+
+| uuid         | 75981062-d688-4d6d-b1b2-32887c1200db |
+| enabled      | True                                 |
+| ntpservers   | 0.pool.ntp.org,1.pool.ntp.org        |
+| isystem_uuid | 76ce9d91-d770-4f94-85b0-7eebb135973e |
+| created_at   | 2019-04-02T10:06:08.063839+00:00     |
+| updated_at   | 2019-04-02T11:23:42.524874+00:00     |
++--------------+--------------------------------------+
+[wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:28.502 - INFO - ${output} = +--------------+--------------------------------------+
+| Property     | Value                                |
++--------------+--------------------------------------+
+| uuid         | 75981062-d68...
+20190402 06:37:28.502 - INFO - +---- END KW: SSHLibrary.Read Until Prompt (1068)
+20190402 06:37:28.502 - INFO - +---- START KW: Utils.Remove Prompt Line [ ${output} ]
+20190402 06:37:28.503 - INFO - +----- START KW: String.Get Line [ ${output} | -1 ]
+20190402 06:37:28.503 - INFO - ${line_to_remove} = [wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:28.503 - INFO - +----- END KW: String.Get Line (0)
+20190402 06:37:28.503 - INFO - +----- START KW: String.Remove String [ ${output} | ${line_to_remove} ]
+20190402 06:37:28.503 - INFO - ${clean_out} = +--------------+--------------------------------------+
+| Property     | Value                                |
++--------------+--------------------------------------+
+| uuid         | 75981062-d68...
+20190402 06:37:28.503 - INFO - +----- END KW: String.Remove String (0)
+20190402 06:37:28.503 - INFO - ${output} = +--------------+--------------------------------------+
+| Property     | Value                                |
++--------------+--------------------------------------+
+| uuid         | 75981062-d68...
+20190402 06:37:28.503 - INFO - +---- END KW: Utils.Remove Prompt Line (1)
+20190402 06:37:28.504 - INFO - +---- START KW: Utils.Get Return Code [ ]
+20190402 06:37:28.504 - INFO - +----- START KW: SSHLibrary.Write [ echo $? ]
+20190402 06:37:28.505 - INFO - echo $?
+20190402 06:37:28.505 - INFO - +----- END KW: SSHLibrary.Write (1)
+20190402 06:37:28.505 - INFO - +----- START KW: SSHLibrary.Read Until Regexp [ [0-9]+ ]
+20190402 06:37:28.505 - INFO - 0
+20190402 06:37:28.506 - INFO - ${rc} = 0
+20190402 06:37:28.506 - INFO - +----- END KW: SSHLibrary.Read Until Regexp (1)
+20190402 06:37:28.506 - INFO - +----- START KW: BuiltIn.Log [ ${rc} ]
+20190402 06:37:28.506 - INFO - 0
+20190402 06:37:28.506 - INFO - +----- END KW: BuiltIn.Log (0)
+20190402 06:37:28.506 - INFO - ${rc} = 0
+20190402 06:37:28.506 - INFO - +---- END KW: Utils.Get Return Code (2)
+20190402 06:37:28.506 - INFO - +---- START KW: BuiltIn.Run Keyword If [ ${rc} == 0 | Set To Dictionary | ${result} | stdout=${output.strip()} | ELSE IF | ${fail_if_error} == True | FAIL | ${output} | ELSE | Set To Dictionary | ${result} | stderr=${output} ]
+20190402 06:37:28.507 - INFO - +----- START KW: Collections.Set To Dictionary [ ${result} | stdout=${output.strip()} ]
+20190402 06:37:28.507 - INFO - +----- END KW: Collections.Set To Dictionary (0)
+20190402 06:37:28.507 - INFO - +---- END KW: BuiltIn.Run Keyword If (1)
+20190402 06:37:28.507 - INFO - +---- START KW: Collections.Set To Dictionary [ ${result} | rc=${rc} ]
+20190402 06:37:28.507 - INFO - +---- END KW: Collections.Set To Dictionary (0)
+20190402 06:37:28.507 - INFO - +---- START KW: Collections.Log Dictionary [ ${result} ]
+20190402 06:37:28.507 - INFO - Dictionary size is 3 and it contains following items:
+rc: 0
+stderr: 
+stdout: +--------------+--------------------------------------+
+| Property     | Value                                |
++--------------+--------------------------------------+
+| uuid         | 75981062-d688-4d6d-b1b2-32887c1200db |
+| enabled      | True                                 |
+| ntpservers   | 0.pool.ntp.org,1.pool.ntp.org        |
+| isystem_uuid | 76ce9d91-d770-4f94-85b0-7eebb135973e |
+| created_at   | 2019-04-02T10:06:08.063839+00:00     |
+| updated_at   | 2019-04-02T11:23:42.524874+00:00     |
++--------------+--------------------------------------+
+20190402 06:37:28.508 - INFO - +---- END KW: Collections.Log Dictionary (1)
+20190402 06:37:28.508 - INFO - +--- END KW: Utils.Run Command (1086)
+20190402 06:37:28.508 - INFO - +-- END KW: Utils.Set NTP Server (1086)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20190402 06:37:28.508 - INFO - +-- START KW: Utils.Configure Data Interfaces [ ${master_controller} | ${data0if} | ${data1if} | ${physnet0} | ${physnet1} | ${mtu} ]
+20190402 06:37:28.508 - INFO - +--- START KW: BuiltIn.Run Keyword If [ '${host}'=='controller-1' | Run Keywords | Provide OAM Network Interface | ${host} | AND | Setup Cluster-host Interfaces | ${host} ]
+20190402 06:37:28.509 - INFO - +--- END KW: BuiltIn.Run Keyword If (1)
+20190402 06:37:28.509 - INFO - +--- START KW: Utils.Get Interface Information [ ${host} | ${data0if} ]
+20190402 06:37:28.509 - INFO - +---- START KW: BuiltIn.Catenate [ SEPARATOR=| | system host-port-list ${host} --nowrap | grep ${interface} | awk '{ print $2,$4,$8}' ]
+20190402 06:37:28.509 - INFO - ${cmd} = system host-port-list controller-0 --nowrap|grep enp24s0f0|awk '{ print $2,$4,$8}'
+20190402 06:37:28.509 - INFO - +---- END KW: BuiltIn.Catenate (0)
+20190402 06:37:28.510 - INFO - +---- START KW: Utils.Run Command [ ${cmd} ]
+20190402 06:37:28.510 - INFO - +----- START KW: SSHLibrary.Set Client Configuration [ timeout=${timeout} | prompt=$ ]
+20190402 06:37:28.510 - INFO - +----- END KW: SSHLibrary.Set Client Configuration (0)
+20190402 06:37:28.510 - INFO - +----- START KW: Utils.Create Empy Result Dictionary [ ]
+20190402 06:37:28.510 - INFO - +------ START KW: BuiltIn.Create Dictionary [ stdout=${EMPTY} ]
+20190402 06:37:28.511 - INFO - &{result_dict} = { stdout= }
+20190402 06:37:28.511 - INFO - +------ END KW: BuiltIn.Create Dictionary (1)
+20190402 06:37:28.511 - INFO - +------ START KW: Collections.Set To Dictionary [ ${result_dict} | stderr=${EMPTY} ]
+20190402 06:37:28.511 - INFO - +------ END KW: Collections.Set To Dictionary (0)
+20190402 06:37:28.511 - INFO - +------ START KW: Collections.Set To Dictionary [ ${result_dict} | rc=${EMPTY} ]
+20190402 06:37:28.512 - INFO - +------ END KW: Collections.Set To Dictionary (1)
+20190402 06:37:28.512 - INFO - &{result} = { stdout= | stderr= | rc= }
+20190402 06:37:28.512 - INFO - +----- END KW: Utils.Create Empy Result Dictionary (2)
+20190402 06:37:28.512 - INFO - +----- START KW: SSHLibrary.Read [ ]
+20190402 06:37:28.512 - INFO - [wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:28.512 - INFO - +----- END KW: SSHLibrary.Read (0)
+20190402 06:37:28.512 - INFO - +----- START KW: SSHLibrary.Write [ ${cmd} ]
+20190402 06:37:28.514 - INFO - system host-port-list controller-0 --n owrap|grep enp24s0f0|awk '{ print $2,$4,$8}'
+20190402 06:37:28.514 - INFO - +----- END KW: SSHLibrary.Write (2)
+20190402 06:37:28.514 - INFO - +----- START KW: SSHLibrary.Read Until Prompt [ ]
+20190402 06:37:29.660 - INFO - 6ef9bf2a-1a6f-4d1e-8890-3f621879b8f6 enp24s0f0 0000:18:00.0
+[wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:29.660 - INFO - ${output} = 6ef9bf2a-1a6f-4d1e-8890-3f621879b8f6 enp24s0f0 0000:18:00.0
+[wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:29.660 - INFO - +----- END KW: SSHLibrary.Read Until Prompt (1146)
+20190402 06:37:29.661 - INFO - +----- START KW: Utils.Remove Prompt Line [ ${output} ]
+20190402 06:37:29.661 - INFO - +------ START KW: String.Get Line [ ${output} | -1 ]
+20190402 06:37:29.661 - INFO - ${line_to_remove} = [wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:29.661 - INFO - +------ END KW: String.Get Line (0)
+20190402 06:37:29.661 - INFO - +------ START KW: String.Remove String [ ${output} | ${line_to_remove} ]
+20190402 06:37:29.661 - INFO - ${clean_out} = 6ef9bf2a-1a6f-4d1e-8890-3f621879b8f6 enp24s0f0 0000:18:00.0
+20190402 06:37:29.662 - INFO - +------ END KW: String.Remove String (1)
+20190402 06:37:29.662 - INFO - ${output} = 6ef9bf2a-1a6f-4d1e-8890-3f621879b8f6 enp24s0f0 0000:18:00.0
+20190402 06:37:29.662 - INFO - +----- END KW: Utils.Remove Prompt Line (1)
+20190402 06:37:29.662 - INFO - +----- START KW: Utils.Get Return Code [ ]
+20190402 06:37:29.662 - INFO - +------ START KW: SSHLibrary.Write [ echo $? ]
+20190402 06:37:29.664 - INFO - echo $?
+20190402 06:37:29.664 - INFO - +------ END KW: SSHLibrary.Write (2)
+20190402 06:37:29.664 - INFO - +------ START KW: SSHLibrary.Read Until Regexp [ [0-9]+ ]
+20190402 06:37:29.664 - INFO - 0
+20190402 06:37:29.664 - INFO - ${rc} = 0
+20190402 06:37:29.664 - INFO - +------ END KW: SSHLibrary.Read Until Regexp (0)
+20190402 06:37:29.664 - INFO - +------ START KW: BuiltIn.Log [ ${rc} ]
+20190402 06:37:29.664 - INFO - 0
+20190402 06:37:29.664 - INFO - +------ END KW: BuiltIn.Log (0)
+20190402 06:37:29.665 - INFO - ${rc} = 0
+20190402 06:37:29.665 - INFO - +----- END KW: Utils.Get Return Code (3)
+20190402 06:37:29.665 - INFO - +----- START KW: BuiltIn.Run Keyword If [ ${rc} == 0 | Set To Dictionary | ${result} | stdout=${output.strip()} | ELSE IF | ${fail_if_error} == True | FAIL | ${output} | ELSE | Set To Dictionary | ${result} | stderr=${output} ]
+20190402 06:37:29.665 - INFO - +------ START KW: Collections.Set To Dictionary [ ${result} | stdout=${output.strip()} ]
+20190402 06:37:29.665 - INFO - +------ END KW: Collections.Set To Dictionary (0)
+20190402 06:37:29.665 - INFO - +----- END KW: BuiltIn.Run Keyword If (0)
+20190402 06:37:29.666 - INFO - +----- START KW: Collections.Set To Dictionary [ ${result} | rc=${rc} ]
+20190402 06:37:29.666 - INFO - +----- END KW: Collections.Set To Dictionary (1)
+20190402 06:37:29.666 - INFO - +----- START KW: Collections.Log Dictionary [ ${result} ]
+20190402 06:37:29.666 - INFO - Dictionary size is 3 and it contains following items:
+rc: 0
+stderr: 
+stdout: 6ef9bf2a-1a6f-4d1e-8890-3f621879b8f6 enp24s0f0 0000:18:00.0
+20190402 06:37:29.666 - INFO - +----- END KW: Collections.Log Dictionary (0)
+20190402 06:37:29.666 - INFO - ${info} = {u'stdout': u'6ef9bf2a-1a6f-4d1e-8890-3f621879b8f6 enp24s0f0 0000:18:00.0', u'stderr': u'', u'rc': u'0'}
+20190402 06:37:29.666 - INFO - +---- END KW: Utils.Run Command (1156)
+20190402 06:37:29.666 - INFO - +---- START KW: Utils.Convert Response To List [ ${info} ]
+20190402 06:37:29.667 - INFO - +----- START KW: Collections.Get From Dictionary [ ${result} | stdout ]
+20190402 06:37:29.667 - INFO - ${response} = 6ef9bf2a-1a6f-4d1e-8890-3f621879b8f6 enp24s0f0 0000:18:00.0
+20190402 06:37:29.667 - INFO - +----- END KW: Collections.Get From Dictionary (0)
+20190402 06:37:29.667 - INFO - +----- START KW: String.Split String [ ${response} ]
+20190402 06:37:29.667 - INFO - @{res_in_list} = [ 6ef9bf2a-1a6f-4d1e-8890-3f621879b8f6 | enp24s0f0 | 0000:18:00.0 ]
+20190402 06:37:29.667 - INFO - +----- END KW: String.Split String (0)
+20190402 06:37:29.667 - INFO - ${info} = [u'6ef9bf2a-1a6f-4d1e-8890-3f621879b8f6', u'enp24s0f0', u'0000:18:00.0']
+20190402 06:37:29.667 - INFO - +---- END KW: Utils.Convert Response To List (1)
+20190402 06:37:29.667 - INFO - ${iface_info} = [u'6ef9bf2a-1a6f-4d1e-8890-3f621879b8f6', u'enp24s0f0', u'0000:18:00.0']
+20190402 06:37:29.667 - INFO - +--- END KW: Utils.Get Interface Information (1158)
+20190402 06:37:29.668 - INFO - +--- START KW: Collections.Get From List [ ${iface_info} | 0 ]
+20190402 06:37:29.668 - INFO - ${data0portuuid} = 6ef9bf2a-1a6f-4d1e-8890-3f621879b8f6
+20190402 06:37:29.668 - INFO - +--- END KW: Collections.Get From List (0)
+20190402 06:37:29.668 - INFO - +--- START KW: Collections.Get From List [ ${iface_info} | 1 ]
+20190402 06:37:29.668 - INFO - ${data0portname} = enp24s0f0
+20190402 06:37:29.668 - INFO - +--- END KW: Collections.Get From List (0)
+20190402 06:37:29.668 - INFO - +--- START KW: Collections.Get From List [ ${iface_info} | 2 ]
+20190402 06:37:29.669 - INFO - ${data0pciaddr} = 0000:18:00.0
+20190402 06:37:29.669 - INFO - +--- END KW: Collections.Get From List (1)
+20190402 06:37:29.669 - INFO - +--- START KW: Utils.Get Interface Information [ ${host} | ${data1if} ]
+20190402 06:37:29.669 - INFO - +---- START KW: BuiltIn.Catenate [ SEPARATOR=| | system host-port-list ${host} --nowrap | grep ${interface} | awk '{ print $2,$4,$8}' ]
+20190402 06:37:29.669 - INFO - ${cmd} = system host-port-list controller-0 --nowrap|grep enp24s0f1|awk '{ print $2,$4,$8}'
+20190402 06:37:29.669 - INFO - +---- END KW: BuiltIn.Catenate (0)
+20190402 06:37:29.669 - INFO - +---- START KW: Utils.Run Command [ ${cmd} ]
+20190402 06:37:29.670 - INFO - +----- START KW: SSHLibrary.Set Client Configuration [ timeout=${timeout} | prompt=$ ]
+20190402 06:37:29.670 - INFO - +----- END KW: SSHLibrary.Set Client Configuration (0)
+20190402 06:37:29.670 - INFO - +----- START KW: Utils.Create Empy Result Dictionary [ ]
+20190402 06:37:29.670 - INFO - +------ START KW: BuiltIn.Create Dictionary [ stdout=${EMPTY} ]
+20190402 06:37:29.671 - INFO - &{result_dict} = { stdout= }
+20190402 06:37:29.671 - INFO - +------ END KW: BuiltIn.Create Dictionary (1)
+20190402 06:37:29.671 - INFO - +------ START KW: Collections.Set To Dictionary [ ${result_dict} | stderr=${EMPTY} ]
+20190402 06:37:29.671 - INFO - +------ END KW: Collections.Set To Dictionary (0)
+20190402 06:37:29.671 - INFO - +------ START KW: Collections.Set To Dictionary [ ${result_dict} | rc=${EMPTY} ]
+20190402 06:37:29.671 - INFO - +------ END KW: Collections.Set To Dictionary (0)
+20190402 06:37:29.672 - INFO - &{result} = { stdout= | stderr= | rc= }
+20190402 06:37:29.672 - INFO - +----- END KW: Utils.Create Empy Result Dictionary (2)
+20190402 06:37:29.672 - INFO - +----- START KW: SSHLibrary.Read [ ]
+20190402 06:37:29.672 - INFO - [wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:29.672 - INFO - +----- END KW: SSHLibrary.Read (0)
+20190402 06:37:29.672 - INFO - +----- START KW: SSHLibrary.Write [ ${cmd} ]
+20190402 06:37:29.674 - INFO - system host-port-list controller-0 --n owrap|grep enp24s0f1|awk '{ print $2,$4,$8}'
+20190402 06:37:29.674 - INFO - +----- END KW: SSHLibrary.Write (2)
+20190402 06:37:29.674 - INFO - +----- START KW: SSHLibrary.Read Until Prompt [ ]
+20190402 06:37:30.716 - INFO - 8f070dfb-c440-470d-82d3-8f5f52d7c2a4 enp24s0f1 0000:18:00.1
+[wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:30.716 - INFO - ${output} = 8f070dfb-c440-470d-82d3-8f5f52d7c2a4 enp24s0f1 0000:18:00.1
+[wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:30.716 - INFO - +----- END KW: SSHLibrary.Read Until Prompt (1042)
+20190402 06:37:30.716 - INFO - +----- START KW: Utils.Remove Prompt Line [ ${output} ]
+20190402 06:37:30.717 - INFO - +------ START KW: String.Get Line [ ${output} | -1 ]
+20190402 06:37:30.717 - INFO - ${line_to_remove} = [wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:30.717 - INFO - +------ END KW: String.Get Line (0)
+20190402 06:37:30.717 - INFO - +------ START KW: String.Remove String [ ${output} | ${line_to_remove} ]
+20190402 06:37:30.717 - INFO - ${clean_out} = 8f070dfb-c440-470d-82d3-8f5f52d7c2a4 enp24s0f1 0000:18:00.1
+20190402 06:37:30.717 - INFO - +------ END KW: String.Remove String (0)
+20190402 06:37:30.717 - INFO - ${output} = 8f070dfb-c440-470d-82d3-8f5f52d7c2a4 enp24s0f1 0000:18:00.1
+20190402 06:37:30.717 - INFO - +----- END KW: Utils.Remove Prompt Line (1)
+20190402 06:37:30.717 - INFO - +----- START KW: Utils.Get Return Code [ ]
+20190402 06:37:30.718 - INFO - +------ START KW: SSHLibrary.Write [ echo $? ]
+20190402 06:37:30.719 - INFO - echo $?
+20190402 06:37:30.719 - INFO - +------ END KW: SSHLibrary.Write (1)
+20190402 06:37:30.719 - INFO - +------ START KW: SSHLibrary.Read Until Regexp [ [0-9]+ ]
+20190402 06:37:30.720 - INFO - 0
+20190402 06:37:30.720 - INFO - ${rc} = 0
+20190402 06:37:30.720 - INFO - +------ END KW: SSHLibrary.Read Until Regexp (1)
+20190402 06:37:30.720 - INFO - +------ START KW: BuiltIn.Log [ ${rc} ]
+20190402 06:37:30.720 - INFO - 0
+20190402 06:37:30.720 - INFO - +------ END KW: BuiltIn.Log (0)
+20190402 06:37:30.720 - INFO - ${rc} = 0
+20190402 06:37:30.720 - INFO - +----- END KW: Utils.Get Return Code (3)
+20190402 06:37:30.720 - INFO - +----- START KW: BuiltIn.Run Keyword If [ ${rc} == 0 | Set To Dictionary | ${result} | stdout=${output.strip()} | ELSE IF | ${fail_if_error} == True | FAIL | ${output} | ELSE | Set To Dictionary | ${result} | stderr=${output} ]
+20190402 06:37:30.721 - INFO - +------ START KW: Collections.Set To Dictionary [ ${result} | stdout=${output.strip()} ]
+20190402 06:37:30.721 - INFO - +------ END KW: Collections.Set To Dictionary (0)
+20190402 06:37:30.721 - INFO - +----- END KW: BuiltIn.Run Keyword If (1)
+20190402 06:37:30.721 - INFO - +----- START KW: Collections.Set To Dictionary [ ${result} | rc=${rc} ]
+20190402 06:37:30.721 - INFO - +----- END KW: Collections.Set To Dictionary (0)
+20190402 06:37:30.722 - INFO - +----- START KW: Collections.Log Dictionary [ ${result} ]
+20190402 06:37:30.722 - INFO - Dictionary size is 3 and it contains following items:
+rc: 0
+stderr: 
+stdout: 8f070dfb-c440-470d-82d3-8f5f52d7c2a4 enp24s0f1 0000:18:00.1
+20190402 06:37:30.722 - INFO - +----- END KW: Collections.Log Dictionary (0)
+20190402 06:37:30.722 - INFO - ${info} = {u'stdout': u'8f070dfb-c440-470d-82d3-8f5f52d7c2a4 enp24s0f1 0000:18:00.1', u'stderr': u'', u'rc': u'0'}
+20190402 06:37:30.722 - INFO - +---- END KW: Utils.Run Command (1053)
+20190402 06:37:30.722 - INFO - +---- START KW: Utils.Convert Response To List [ ${info} ]
+20190402 06:37:30.722 - INFO - +----- START KW: Collections.Get From Dictionary [ ${result} | stdout ]
+20190402 06:37:30.723 - INFO - ${response} = 8f070dfb-c440-470d-82d3-8f5f52d7c2a4 enp24s0f1 0000:18:00.1
+20190402 06:37:30.723 - INFO - +----- END KW: Collections.Get From Dictionary (1)
+20190402 06:37:30.723 - INFO - +----- START KW: String.Split String [ ${response} ]
+20190402 06:37:30.723 - INFO - @{res_in_list} = [ 8f070dfb-c440-470d-82d3-8f5f52d7c2a4 | enp24s0f1 | 0000:18:00.1 ]
+20190402 06:37:30.723 - INFO - +----- END KW: String.Split String (0)
+20190402 06:37:30.723 - INFO - ${info} = [u'8f070dfb-c440-470d-82d3-8f5f52d7c2a4', u'enp24s0f1', u'0000:18:00.1']
+20190402 06:37:30.723 - INFO - +---- END KW: Utils.Convert Response To List (1)
+20190402 06:37:30.723 - INFO - ${iface_info} = [u'8f070dfb-c440-470d-82d3-8f5f52d7c2a4', u'enp24s0f1', u'0000:18:00.1']
+20190402 06:37:30.723 - INFO - +--- END KW: Utils.Get Interface Information (1054)
+20190402 06:37:30.723 - INFO - +--- START KW: Collections.Get From List [ ${iface_info} | 0 ]
+20190402 06:37:30.724 - INFO - ${data1portuuid} = 8f070dfb-c440-470d-82d3-8f5f52d7c2a4
+20190402 06:37:30.724 - INFO - +--- END KW: Collections.Get From List (1)
+20190402 06:37:30.724 - INFO - +--- START KW: Collections.Get From List [ ${iface_info} | 1 ]
+20190402 06:37:30.724 - INFO - ${data1portname} = enp24s0f1
+20190402 06:37:30.724 - INFO - +--- END KW: Collections.Get From List (0)
+20190402 06:37:30.724 - INFO - +--- START KW: Collections.Get From List [ ${iface_info} | 2 ]
+20190402 06:37:30.724 - INFO - ${data1pciaddr} = 0000:18:00.1
+20190402 06:37:30.724 - INFO - +--- END KW: Collections.Get From List (0)
+20190402 06:37:30.724 - INFO - +--- START KW: Utils.Get Interface UUID [ ${host} | ${data0portname} ]
+20190402 06:37:30.725 - INFO - +---- START KW: BuiltIn.Catenate [ SEPARATOR=| | system host-if-list -a ${host} | grep ${port_name} | awk '{print $2}' ]
+20190402 06:37:30.725 - INFO - ${cmd} = system host-if-list -a controller-0|grep enp24s0f0|awk '{print $2}'
+20190402 06:37:30.725 - INFO - +---- END KW: BuiltIn.Catenate (0)
+20190402 06:37:30.725 - INFO - +---- START KW: Utils.Run Command [ ${cmd} ]
+20190402 06:37:30.725 - INFO - +----- START KW: SSHLibrary.Set Client Configuration [ timeout=${timeout} | prompt=$ ]
+20190402 06:37:30.726 - INFO - +----- END KW: SSHLibrary.Set Client Configuration (1)
+20190402 06:37:30.726 - INFO - +----- START KW: Utils.Create Empy Result Dictionary [ ]
+20190402 06:37:30.726 - INFO - +------ START KW: BuiltIn.Create Dictionary [ stdout=${EMPTY} ]
+20190402 06:37:30.726 - INFO - &{result_dict} = { stdout= }
+20190402 06:37:30.726 - INFO - +------ END KW: BuiltIn.Create Dictionary (0)
+20190402 06:37:30.727 - INFO - +------ START KW: Collections.Set To Dictionary [ ${result_dict} | stderr=${EMPTY} ]
+20190402 06:37:30.727 - INFO - +------ END KW: Collections.Set To Dictionary (0)
+20190402 06:37:30.727 - INFO - +------ START KW: Collections.Set To Dictionary [ ${result_dict} | rc=${EMPTY} ]
+20190402 06:37:30.727 - INFO - +------ END KW: Collections.Set To Dictionary (0)
+20190402 06:37:30.727 - INFO - &{result} = { stdout= | stderr= | rc= }
+20190402 06:37:30.727 - INFO - +----- END KW: Utils.Create Empy Result Dictionary (1)
+20190402 06:37:30.727 - INFO - +----- START KW: SSHLibrary.Read [ ]
+20190402 06:37:30.728 - INFO - [wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:30.728 - INFO - +----- END KW: SSHLibrary.Read (1)
+20190402 06:37:30.728 - INFO - +----- START KW: SSHLibrary.Write [ ${cmd} ]
+20190402 06:37:30.738 - INFO - system host-if-list -a controller-0|gr ep enp24s0f0|awk '{print $2}'
+20190402 06:37:30.738 - INFO - +----- END KW: SSHLibrary.Write (10)
+20190402 06:37:30.738 - INFO - +----- START KW: SSHLibrary.Read Until Prompt [ ]
+20190402 06:37:31.896 - INFO - c22463b6-2fe0-479e-b810-8ece7e444a4f
+[wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:31.896 - INFO - ${output} = c22463b6-2fe0-479e-b810-8ece7e444a4f
+[wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:31.896 - INFO - +----- END KW: SSHLibrary.Read Until Prompt (1158)
+20190402 06:37:31.896 - INFO - +----- START KW: Utils.Remove Prompt Line [ ${output} ]
+20190402 06:37:31.896 - INFO - +------ START KW: String.Get Line [ ${output} | -1 ]
+20190402 06:37:31.897 - INFO - ${line_to_remove} = [wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:31.897 - INFO - +------ END KW: String.Get Line (1)
+20190402 06:37:31.897 - INFO - +------ START KW: String.Remove String [ ${output} | ${line_to_remove} ]
+20190402 06:37:31.897 - INFO - ${clean_out} = c22463b6-2fe0-479e-b810-8ece7e444a4f
+20190402 06:37:31.897 - INFO - +------ END KW: String.Remove String (0)
+20190402 06:37:31.897 - INFO - ${output} = c22463b6-2fe0-479e-b810-8ece7e444a4f
+20190402 06:37:31.897 - INFO - +----- END KW: Utils.Remove Prompt Line (1)
+20190402 06:37:31.897 - INFO - +----- START KW: Utils.Get Return Code [ ]
+20190402 06:37:31.898 - INFO - +------ START KW: SSHLibrary.Write [ echo $? ]
+20190402 06:37:31.899 - INFO - echo $?
+20190402 06:37:31.900 - INFO - +------ END KW: SSHLibrary.Write (1)
+20190402 06:37:31.900 - INFO - +------ START KW: SSHLibrary.Read Until Regexp [ [0-9]+ ]
+20190402 06:37:31.900 - INFO - 0
+20190402 06:37:31.900 - INFO - ${rc} = 0
+20190402 06:37:31.900 - INFO - +------ END KW: SSHLibrary.Read Until Regexp (0)
+20190402 06:37:31.900 - INFO - +------ START KW: BuiltIn.Log [ ${rc} ]
+20190402 06:37:31.900 - INFO - 0
+20190402 06:37:31.900 - INFO - +------ END KW: BuiltIn.Log (0)
+20190402 06:37:31.900 - INFO - ${rc} = 0
+20190402 06:37:31.900 - INFO - +----- END KW: Utils.Get Return Code (3)
+20190402 06:37:31.901 - INFO - +----- START KW: BuiltIn.Run Keyword If [ ${rc} == 0 | Set To Dictionary | ${result} | stdout=${output.strip()} | ELSE IF | ${fail_if_error} == True | FAIL | ${output} | ELSE | Set To Dictionary | ${result} | stderr=${output} ]
+20190402 06:37:31.901 - INFO - +------ START KW: Collections.Set To Dictionary [ ${result} | stdout=${output.strip()} ]
+20190402 06:37:31.901 - INFO - +------ END KW: Collections.Set To Dictionary (0)
+20190402 06:37:31.901 - INFO - +----- END KW: BuiltIn.Run Keyword If (0)
+20190402 06:37:31.901 - INFO - +----- START KW: Collections.Set To Dictionary [ ${result} | rc=${rc} ]
+20190402 06:37:31.902 - INFO - +----- END KW: Collections.Set To Dictionary (1)
+20190402 06:37:31.902 - INFO - +----- START KW: Collections.Log Dictionary [ ${result} ]
+20190402 06:37:31.902 - INFO - Dictionary size is 3 and it contains following items:
+rc: 0
+stderr: 
+stdout: c22463b6-2fe0-479e-b810-8ece7e444a4f
+20190402 06:37:31.902 - INFO - +----- END KW: Collections.Log Dictionary (0)
+20190402 06:37:31.902 - INFO - ${uuid} = {u'stdout': u'c22463b6-2fe0-479e-b810-8ece7e444a4f', u'stderr': u'', u'rc': u'0'}
+20190402 06:37:31.902 - INFO - +---- END KW: Utils.Run Command (1177)
+20190402 06:37:31.902 - INFO - ${data0ifuuid} = c22463b6-2fe0-479e-b810-8ece7e444a4f
+20190402 06:37:31.902 - INFO - +--- END KW: Utils.Get Interface UUID (1178)
+20190402 06:37:31.902 - INFO - +--- START KW: Utils.Get Interface UUID [ ${host} | ${data1portname} ]
+20190402 06:37:31.903 - INFO - +---- START KW: BuiltIn.Catenate [ SEPARATOR=| | system host-if-list -a ${host} | grep ${port_name} | awk '{print $2}' ]
+20190402 06:37:31.903 - INFO - ${cmd} = system host-if-list -a controller-0|grep enp24s0f1|awk '{print $2}'
+20190402 06:37:31.903 - INFO - +---- END KW: BuiltIn.Catenate (0)
+20190402 06:37:31.903 - INFO - +---- START KW: Utils.Run Command [ ${cmd} ]
+20190402 06:37:31.904 - INFO - +----- START KW: SSHLibrary.Set Client Configuration [ timeout=${timeout} | prompt=$ ]
+20190402 06:37:31.905 - INFO - +----- END KW: SSHLibrary.Set Client Configuration (1)
+20190402 06:37:31.905 - INFO - +----- START KW: Utils.Create Empy Result Dictionary [ ]
+20190402 06:37:31.905 - INFO - +------ START KW: BuiltIn.Create Dictionary [ stdout=${EMPTY} ]
+20190402 06:37:31.905 - INFO - &{result_dict} = { stdout= }
+20190402 06:37:31.905 - INFO - +------ END KW: BuiltIn.Create Dictionary (0)
+20190402 06:37:31.905 - INFO - +------ START KW: Collections.Set To Dictionary [ ${result_dict} | stderr=${EMPTY} ]
+20190402 06:37:31.906 - INFO - +------ END KW: Collections.Set To Dictionary (1)
+20190402 06:37:31.906 - INFO - +------ START KW: Collections.Set To Dictionary [ ${result_dict} | rc=${EMPTY} ]
+20190402 06:37:31.906 - INFO - +------ END KW: Collections.Set To Dictionary (0)
+20190402 06:37:31.906 - INFO - &{result} = { stdout= | stderr= | rc= }
+20190402 06:37:31.906 - INFO - +----- END KW: Utils.Create Empy Result Dictionary (1)
+20190402 06:37:31.906 - INFO - +----- START KW: SSHLibrary.Read [ ]
+20190402 06:37:31.907 - INFO - [wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:31.907 - INFO - +----- END KW: SSHLibrary.Read (1)
+20190402 06:37:31.907 - INFO - +----- START KW: SSHLibrary.Write [ ${cmd} ]
+20190402 06:37:31.917 - INFO - system host-if-list -a controller-0|gr ep enp24s0f1|awk '{print $2}'
+20190402 06:37:31.917 - INFO - +----- END KW: SSHLibrary.Write (10)
+20190402 06:37:31.917 - INFO - +----- START KW: SSHLibrary.Read Until Prompt [ ]
+20190402 06:37:33.071 - INFO - f623786d-bcad-4598-90c5-723841b5f6c9
+[wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:33.071 - INFO - ${output} = f623786d-bcad-4598-90c5-723841b5f6c9
+[wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:33.071 - INFO - +----- END KW: SSHLibrary.Read Until Prompt (1154)
+20190402 06:37:33.072 - INFO - +----- START KW: Utils.Remove Prompt Line [ ${output} ]
+20190402 06:37:33.072 - INFO - +------ START KW: String.Get Line [ ${output} | -1 ]
+20190402 06:37:33.072 - INFO - ${line_to_remove} = [wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:33.072 - INFO - +------ END KW: String.Get Line (0)
+20190402 06:37:33.072 - INFO - +------ START KW: String.Remove String [ ${output} | ${line_to_remove} ]
+20190402 06:37:33.072 - INFO - ${clean_out} = f623786d-bcad-4598-90c5-723841b5f6c9
+20190402 06:37:33.073 - INFO - +------ END KW: String.Remove String (1)
+20190402 06:37:33.073 - INFO - ${output} = f623786d-bcad-4598-90c5-723841b5f6c9
+20190402 06:37:33.073 - INFO - +----- END KW: Utils.Remove Prompt Line (1)
+20190402 06:37:33.073 - INFO - +----- START KW: Utils.Get Return Code [ ]
+20190402 06:37:33.073 - INFO - +------ START KW: SSHLibrary.Write [ echo $? ]
+20190402 06:37:33.075 - INFO - echo $?
+20190402 06:37:33.075 - INFO - +------ END KW: SSHLibrary.Write (2)
+20190402 06:37:33.075 - INFO - +------ START KW: SSHLibrary.Read Until Regexp [ [0-9]+ ]
+20190402 06:37:33.075 - INFO - 0
+20190402 06:37:33.075 - INFO - ${rc} = 0
+20190402 06:37:33.075 - INFO - +------ END KW: SSHLibrary.Read Until Regexp (0)
+20190402 06:37:33.076 - INFO - +------ START KW: BuiltIn.Log [ ${rc} ]
+20190402 06:37:33.076 - INFO - 0
+20190402 06:37:33.076 - INFO - +------ END KW: BuiltIn.Log (0)
+20190402 06:37:33.076 - INFO - ${rc} = 0
+20190402 06:37:33.076 - INFO - +----- END KW: Utils.Get Return Code (3)
+20190402 06:37:33.076 - INFO - +----- START KW: BuiltIn.Run Keyword If [ ${rc} == 0 | Set To Dictionary | ${result} | stdout=${output.strip()} | ELSE IF | ${fail_if_error} == True | FAIL | ${output} | ELSE | Set To Dictionary | ${result} | stderr=${output} ]
+20190402 06:37:33.076 - INFO - +------ START KW: Collections.Set To Dictionary [ ${result} | stdout=${output.strip()} ]
+20190402 06:37:33.077 - INFO - +------ END KW: Collections.Set To Dictionary (1)
+20190402 06:37:33.077 - INFO - +----- END KW: BuiltIn.Run Keyword If (1)
+20190402 06:37:33.077 - INFO - +----- START KW: Collections.Set To Dictionary [ ${result} | rc=${rc} ]
+20190402 06:37:33.077 - INFO - +----- END KW: Collections.Set To Dictionary (0)
+20190402 06:37:33.077 - INFO - +----- START KW: Collections.Log Dictionary [ ${result} ]
+20190402 06:37:33.077 - INFO - Dictionary size is 3 and it contains following items:
+rc: 0
+stderr: 
+stdout: f623786d-bcad-4598-90c5-723841b5f6c9
+20190402 06:37:33.077 - INFO - +----- END KW: Collections.Log Dictionary (0)
+20190402 06:37:33.078 - INFO - ${uuid} = {u'stdout': u'f623786d-bcad-4598-90c5-723841b5f6c9', u'stderr': u'', u'rc': u'0'}
+20190402 06:37:33.078 - INFO - +---- END KW: Utils.Run Command (1175)
+20190402 06:37:33.078 - INFO - ${data1ifuuid} = f623786d-bcad-4598-90c5-723841b5f6c9
+20190402 06:37:33.078 - INFO - +--- END KW: Utils.Get Interface UUID (1176)
+20190402 06:37:33.078 - INFO - +--- START KW: BuiltIn.Run Keyword If [ '${host}'=='controller-0' or '${host}'=='compute-0' | Run Keywords | Run Command | system datanetwork-add ${physnet0} vlan | True | AND | Run Command | system datanetwork-add ${physnet1} vlan | True ]
+20190402 06:37:33.078 - INFO - +---- START KW: BuiltIn.Run Keywords [ Run Command | system datanetwork-add ${physnet0} vlan | True | AND | Run Command | system datanetwork-add ${physnet1} vlan | True ]
+20190402 06:37:33.079 - INFO - +----- START KW: Utils.Run Command [ system datanetwork-add ${physnet0} vlan | True ]
+20190402 06:37:33.079 - INFO - +------ START KW: SSHLibrary.Set Client Configuration [ timeout=${timeout} | prompt=$ ]
+20190402 06:37:33.079 - INFO - +------ END KW: SSHLibrary.Set Client Configuration (0)
+20190402 06:37:33.079 - INFO - +------ START KW: Utils.Create Empy Result Dictionary [ ]
+20190402 06:37:33.079 - INFO - +------- START KW: BuiltIn.Create Dictionary [ stdout=${EMPTY} ]
+20190402 06:37:33.080 - INFO - &{result_dict} = { stdout= }
+20190402 06:37:33.080 - INFO - +------- END KW: BuiltIn.Create Dictionary (1)
+20190402 06:37:33.080 - INFO - +------- START KW: Collections.Set To Dictionary [ ${result_dict} | stderr=${EMPTY} ]
+20190402 06:37:33.080 - INFO - +------- END KW: Collections.Set To Dictionary (0)
+20190402 06:37:33.080 - INFO - +------- START KW: Collections.Set To Dictionary [ ${result_dict} | rc=${EMPTY} ]
+20190402 06:37:33.081 - INFO - +------- END KW: Collections.Set To Dictionary (1)
+20190402 06:37:33.081 - INFO - &{result} = { stdout= | stderr= | rc= }
+20190402 06:37:33.081 - INFO - +------ END KW: Utils.Create Empy Result Dictionary (2)
+20190402 06:37:33.081 - INFO - +------ START KW: SSHLibrary.Read [ ]
+20190402 06:37:33.081 - INFO - [wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:33.081 - INFO - +------ END KW: SSHLibrary.Read (0)
+20190402 06:37:33.081 - INFO - +------ START KW: SSHLibrary.Write [ ${cmd} ]
+20190402 06:37:33.089 - INFO - system datanetwork-add physnet0 vlan
+20190402 06:37:33.089 - INFO - +------ END KW: SSHLibrary.Write (8)
+20190402 06:37:33.089 - INFO - +------ START KW: SSHLibrary.Read Until Prompt [ ]
+20190402 06:37:34.076 - INFO - DataNetwork of name physnet0 already exists.
+[wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:34.076 - INFO - ${output} = DataNetwork of name physnet0 already exists.
+[wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:34.076 - INFO - +------ END KW: SSHLibrary.Read Until Prompt (987)
+20190402 06:37:34.077 - INFO - +------ START KW: Utils.Remove Prompt Line [ ${output} ]
+20190402 06:37:34.077 - INFO - +------- START KW: String.Get Line [ ${output} | -1 ]
+20190402 06:37:34.077 - INFO - ${line_to_remove} = [wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:37:34.077 - INFO - +------- END KW: String.Get Line (0)
+20190402 06:37:34.077 - INFO - +------- START KW: String.Remove String [ ${output} | ${line_to_remove} ]
+20190402 06:37:34.078 - INFO - ${clean_out} = DataNetwork of name physnet0 already exists.
+20190402 06:37:34.078 - INFO - +------- END KW: String.Remove String (1)
+20190402 06:37:34.078 - INFO - ${output} = DataNetwork of name physnet0 already exists.
+20190402 06:37:34.078 - INFO - +------ END KW: Utils.Remove Prompt Line (1)
+20190402 06:37:34.078 - INFO - +------ START KW: Utils.Get Return Code [ ]
+20190402 06:37:34.078 - INFO - +------- START KW: SSHLibrary.Write [ echo $? ]
+20190402 06:37:34.080 - INFO - echo $?
+20190402 06:37:34.080 - INFO - +------- END KW: SSHLibrary.Write (2)
+20190402 06:37:34.080 - INFO - +------- START KW: SSHLibrary.Read Until Regexp [ [0-9]+ ]
+20190402 06:37:34.080 - INFO - 1
+20190402 06:37:34.081 - INFO - ${rc} = 1
+20190402 06:37:34.081 - INFO - +------- END KW: SSHLibrary.Read Until Regexp (1)
+20190402 06:37:34.081 - INFO - +------- START KW: BuiltIn.Log [ ${rc} ]
+20190402 06:37:34.081 - INFO - 1
+20190402 06:37:34.081 - INFO - +------- END KW: BuiltIn.Log (0)
+20190402 06:37:34.081 - INFO - ${rc} = 1
+20190402 06:37:34.081 - INFO - +------ END KW: Utils.Get Return Code (3)
+20190402 06:37:34.081 - INFO - +------ START KW: BuiltIn.Run Keyword If [ ${rc} == 0 | Set To Dictionary | ${result} | stdout=${output.strip()} | ELSE IF | ${fail_if_error} == True | FAIL | ${output} | ELSE | Set To Dictionary | ${result} | stderr=${output} ]
+20190402 06:37:34.082 - INFO - +------- START KW: BuiltIn.Fail [ ${output} ]
+20190402 06:37:34.082 - FAIL - DataNetwork of name physnet0 already exists.
+20190402 06:37:34.082 - DEBUG - Traceback (most recent call last):
+  None
+20190402 06:37:34.082 - INFO - +------- END KW: BuiltIn.Fail (0)
+20190402 06:37:34.082 - INFO - +------ END KW: BuiltIn.Run Keyword If (1)
+20190402 06:37:34.082 - INFO - +----- END KW: Utils.Run Command (1003)
+20190402 06:37:34.082 - INFO - +---- END KW: BuiltIn.Run Keywords (1004)
+20190402 06:37:34.082 - INFO - +--- END KW: BuiltIn.Run Keyword If (1004)
+20190402 06:37:34.082 - INFO - +-- END KW: Utils.Configure Data Interfaces (5574)
+------------------------------------------------------------------------------
+20190402 06:37:34.083 - INFO - +- END TEST: Provisioning Duplex System (6661)
+------------------------------------------------------------------------------
+20190402 06:37:34.084 - INFO - + END SUITE: Provision-Containers (8397)
+==============================================================================

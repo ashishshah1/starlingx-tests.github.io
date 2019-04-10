@@ -1,0 +1,196 @@
+==============================================================================
+20190402 06:42:01.116 - INFO - + START SUITE: Provision-Containers [ ]
+==============================================================================
+20190402 06:42:01.117 - INFO - +- START SETUP: BuiltIn.Run Keywords [ Utils.Stx Suite Setup | provisioning.Assign Data Interfaces ]
+20190402 06:42:01.117 - INFO - +-- START KW: Utils.Stx Suite Setup [ ]
+20190402 06:42:01.117 - INFO - +--- START KW: Utils.Open Master Controller Connection [ ]
+20190402 06:42:01.118 - INFO - +---- START KW: Utils.Connect to Controller Node [ ${CONFIG.credentials.STX_DEPLOY_USER_NAME} | ${CONFIG.credentials.STX_DEPLOY_USER_PSWD} | ${CONFIG.general.IP_UNIT_0_ADDRESS} ]
+20190402 06:42:01.118 - INFO - +----- START KW: SSHLibrary.Open Connection [ ${ip_address} prompt=${prompt} | timeout=${timeout} ]
+20190402 06:42:01.118 - INFO - ${controller_connection} = 1
+20190402 06:42:01.118 - INFO - +----- END KW: SSHLibrary.Open Connection (0)
+20190402 06:42:01.119 - INFO - +----- START KW: Utils.Flexible_SSH_Login [ ${user} | ${password} ]
+20190402 06:42:01.119 - INFO - +------ START KW: BuiltIn.Get Length [ ${password} ]
+20190402 06:42:01.119 - INFO - Length is 10
+20190402 06:42:01.119 - INFO - ${pwd_length} = 10
+20190402 06:42:01.119 - INFO - +------ END KW: BuiltIn.Get Length (0)
+20190402 06:42:01.119 - INFO - +------ START KW: BuiltIn.Run Keyword And Return If [ ${pwd_length} > 0 | SSHLibrary.Login | ${user} | ${password} | delay=${delay} ]
+20190402 06:42:01.119 - INFO - +------- START KW: SSHLibrary.Login [ ${user} | ${password} | delay=${delay} ]
+20190402 06:42:01.120 - INFO - Logging into '192.168.200.76 prompt=$:22' as 'wrsroot'.
+20190402 06:42:02.225 - INFO - Read output: Last login: Tue Apr  2 12:29:00 2019 from 192.168.200.60
+/etc/motd.d/00-header:
+
+[H[2J
+WARNING: Unauthorized access to this system is forbidden and will be
+prosecuted by law. By accessing this system, you agree that your
+actions may be monitored if unauthorized usage is suspected.
+
+controller-0:~$
+20190402 06:42:02.226 - INFO - /home/mgperezi/duplex/stx-test-suite/Maria/lib/python2.7/site-packages/paramiko/kex_ecdh_nist.py:39: CryptographyDeprecationWarning: encode_point has been deprecated on EllipticCurvePublicNumbers and will be removed in a future version. Please use EllipticCurvePublicKey.public_bytes to obtain both compressed and uncompressed point encoding.
+  m.add_string(self.Q_C.public_numbers().encode_point())
+/home/mgperezi/duplex/stx-test-suite/Maria/lib/python2.7/site-packages/paramiko/kex_ecdh_nist.py:96: CryptographyDeprecationWarning: Support for unsafe construction of public numbers from encoded data will be removed in a future version. Please use EllipticCurvePublicKey.from_encoded_point
+  self.curve, Q_S_bytes
+/home/mgperezi/duplex/stx-test-suite/Maria/lib/python2.7/site-packages/paramiko/kex_ecdh_nist.py:111: CryptographyDeprecationWarning: encode_point has been deprecated on EllipticCurvePublicNumbers and will be removed in a future version. Please use EllipticCurvePublicKey.public_bytes to obtain both compressed and uncompressed point encoding.
+  hm.add_string(self.Q_C.public_numbers().encode_point())
+20190402 06:42:02.227 - INFO - +------- END KW: SSHLibrary.Login (1107)
+20190402 06:42:02.227 - INFO - Returning from the enclosing user keyword.
+20190402 06:42:02.227 - INFO - +------ END KW: BuiltIn.Run Keyword And Return If (1108)
+20190402 06:42:02.228 - INFO - +----- END KW: Utils.Flexible_SSH_Login (1110)
+20190402 06:42:02.229 - INFO - ${master_controller_connection} = 1
+20190402 06:42:02.229 - INFO - +---- END KW: Utils.Connect to Controller Node (1111)
+20190402 06:42:02.230 - INFO - +---- START KW: BuiltIn.Set Suite Variable [ ${master_controller_connection} ]
+20190402 06:42:02.230 - INFO - ${master_controller_connection} = 1
+20190402 06:42:02.231 - INFO - +---- END KW: BuiltIn.Set Suite Variable (2)
+20190402 06:42:02.231 - INFO - +---- START KW: BuiltIn.Log [ ${master_controller_connection} ]
+20190402 06:42:02.232 - INFO - 1
+20190402 06:42:02.232 - INFO - +---- END KW: BuiltIn.Log (1)
+20190402 06:42:02.232 - INFO - +--- END KW: Utils.Open Master Controller Connection (1115)
+20190402 06:42:02.232 - INFO - +--- START KW: Utils.Set Env Vars From Openrc [ ]
+20190402 06:42:02.232 - INFO - +---- START KW: Utils.Run Command [ source /etc/platform/openrc | True ]
+20190402 06:42:02.233 - INFO - +----- START KW: SSHLibrary.Set Client Configuration [ timeout=${timeout} | prompt=$ ]
+20190402 06:42:02.233 - INFO - +----- END KW: SSHLibrary.Set Client Configuration (0)
+20190402 06:42:02.233 - INFO - +----- START KW: Utils.Create Empy Result Dictionary [ ]
+20190402 06:42:02.233 - INFO - +------ START KW: BuiltIn.Create Dictionary [ stdout=${EMPTY} ]
+20190402 06:42:02.234 - INFO - &{result_dict} = { stdout= }
+20190402 06:42:02.234 - INFO - +------ END KW: BuiltIn.Create Dictionary (1)
+20190402 06:42:02.234 - INFO - +------ START KW: Collections.Set To Dictionary [ ${result_dict} | stderr=${EMPTY} ]
+20190402 06:42:02.234 - INFO - +------ END KW: Collections.Set To Dictionary (0)
+20190402 06:42:02.234 - INFO - +------ START KW: Collections.Set To Dictionary [ ${result_dict} | rc=${EMPTY} ]
+20190402 06:42:02.234 - INFO - +------ END KW: Collections.Set To Dictionary (0)
+20190402 06:42:02.235 - INFO - &{result} = { stdout= | stderr= | rc= }
+20190402 06:42:02.235 - INFO - +----- END KW: Utils.Create Empy Result Dictionary (2)
+20190402 06:42:02.235 - INFO - +----- START KW: SSHLibrary.Read [ ]
+20190402 06:42:02.235 - INFO - +----- END KW: SSHLibrary.Read (0)
+20190402 06:42:02.235 - INFO - +----- START KW: SSHLibrary.Write [ ${cmd} ]
+20190402 06:42:02.238 - INFO - source /etc/platform/openrc
+20190402 06:42:02.238 - INFO - +----- END KW: SSHLibrary.Write (3)
+20190402 06:42:02.239 - INFO - +----- START KW: SSHLibrary.Read Until Prompt [ ]
+20190402 06:42:02.611 - INFO - [wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:42:02.612 - INFO - ${output} = [wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:42:02.612 - INFO - +----- END KW: SSHLibrary.Read Until Prompt (373)
+20190402 06:42:02.612 - INFO - +----- START KW: Utils.Remove Prompt Line [ ${output} ]
+20190402 06:42:02.612 - INFO - +------ START KW: String.Get Line [ ${output} | -1 ]
+20190402 06:42:02.612 - INFO - ${line_to_remove} = [wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:42:02.612 - INFO - +------ END KW: String.Get Line (0)
+20190402 06:42:02.613 - INFO - +------ START KW: String.Remove String [ ${output} | ${line_to_remove} ]
+20190402 06:42:02.613 - INFO - ${clean_out} =
+20190402 06:42:02.613 - INFO - +------ END KW: String.Remove String (1)
+20190402 06:42:02.613 - INFO - ${output} =
+20190402 06:42:02.613 - INFO - +----- END KW: Utils.Remove Prompt Line (1)
+20190402 06:42:02.613 - INFO - +----- START KW: Utils.Get Return Code [ ]
+20190402 06:42:02.613 - INFO - +------ START KW: SSHLibrary.Write [ echo $? ]
+20190402 06:42:02.614 - INFO - echo $?
+20190402 06:42:02.615 - INFO - +------ END KW: SSHLibrary.Write (2)
+20190402 06:42:02.615 - INFO - +------ START KW: SSHLibrary.Read Until Regexp [ [0-9]+ ]
+20190402 06:42:02.615 - INFO - 0
+20190402 06:42:02.615 - INFO - ${rc} = 0
+20190402 06:42:02.615 - INFO - +------ END KW: SSHLibrary.Read Until Regexp (0)
+20190402 06:42:02.615 - INFO - +------ START KW: BuiltIn.Log [ ${rc} ]
+20190402 06:42:02.615 - INFO - 0
+20190402 06:42:02.616 - INFO - +------ END KW: BuiltIn.Log (1)
+20190402 06:42:02.616 - INFO - ${rc} = 0
+20190402 06:42:02.616 - INFO - +----- END KW: Utils.Get Return Code (3)
+20190402 06:42:02.616 - INFO - +----- START KW: BuiltIn.Run Keyword If [ ${rc} == 0 | Set To Dictionary | ${result} | stdout=${output.strip()} | ELSE IF | ${fail_if_error} == True | FAIL | ${output} | ELSE | Set To Dictionary | ${result} | stderr=${output} ]
+20190402 06:42:02.616 - INFO - +------ START KW: Collections.Set To Dictionary [ ${result} | stdout=${output.strip()} ]
+20190402 06:42:02.616 - INFO - +------ END KW: Collections.Set To Dictionary (0)
+20190402 06:42:02.616 - INFO - +----- END KW: BuiltIn.Run Keyword If (0)
+20190402 06:42:02.617 - INFO - +----- START KW: Collections.Set To Dictionary [ ${result} | rc=${rc} ]
+20190402 06:42:02.617 - INFO - +----- END KW: Collections.Set To Dictionary (0)
+20190402 06:42:02.617 - INFO - +----- START KW: Collections.Log Dictionary [ ${result} ]
+20190402 06:42:02.617 - INFO - Dictionary size is 3 and it contains following items:
+rc: 0
+stderr: 
+stdout:
+20190402 06:42:02.617 - INFO - +----- END KW: Collections.Log Dictionary (0)
+20190402 06:42:02.617 - INFO - +---- END KW: Utils.Run Command (385)
+20190402 06:42:02.617 - INFO - +--- END KW: Utils.Set Env Vars From Openrc (385)
+20190402 06:42:02.617 - INFO - +-- END KW: Utils.Stx Suite Setup (1500)
+20190402 06:42:02.618 - INFO - +-- START KW: provisioning.Assign Data Interfaces [ ]
+20190402 06:42:02.618 - INFO - +--- START KW: BuiltIn.Run Keyword If [ '${ENVIRONMENT}'=='virtual' | Create List | eth1000 | eth1001 | ELSE | Create List | enp24s0f0 | enp24s0f1 ]
+20190402 06:42:02.618 - INFO - +---- START KW: BuiltIn.Create List [ enp24s0f0 | enp24s0f1 ]
+20190402 06:42:02.618 - INFO - +---- END KW: BuiltIn.Create List (0)
+20190402 06:42:02.618 - INFO - @{data_interfaces} = [ enp24s0f0 | enp24s0f1 ]
+20190402 06:42:02.618 - INFO - +--- END KW: BuiltIn.Run Keyword If (0)
+20190402 06:42:02.618 - INFO - +--- START KW: Collections.Get From List [ ${data_interfaces} | 0 ]
+20190402 06:42:02.619 - INFO - ${data0if} = enp24s0f0
+20190402 06:42:02.619 - INFO - +--- END KW: Collections.Get From List (1)
+20190402 06:42:02.619 - INFO - +--- START KW: Collections.Get From List [ ${data_interfaces} | 1 ]
+20190402 06:42:02.619 - INFO - ${data1if} = enp24s0f1
+20190402 06:42:02.619 - INFO - +--- END KW: Collections.Get From List (0)
+20190402 06:42:02.619 - INFO - +--- START KW: BuiltIn.Set Suite Variable [ ${data0if} ]
+20190402 06:42:02.619 - INFO - ${data0if} = enp24s0f0
+20190402 06:42:02.620 - INFO - +--- END KW: BuiltIn.Set Suite Variable (0)
+20190402 06:42:02.620 - INFO - +--- START KW: BuiltIn.Set Suite Variable [ ${data1if} ]
+20190402 06:42:02.620 - INFO - ${data1if} = enp24s0f1
+20190402 06:42:02.620 - INFO - +--- END KW: BuiltIn.Set Suite Variable (0)
+20190402 06:42:02.620 - INFO - +-- END KW: provisioning.Assign Data Interfaces (2)
+20190402 06:42:02.620 - INFO - +- END SETUP: BuiltIn.Run Keywords (1503)
+------------------------------------------------------------------------------
+20190402 06:42:02.620 - INFO - +- START TEST: Provisioning Duplex System [ ]
+------------------------------------------------------------------------------
+20190402 06:42:02.621 - INFO - +-- START KW: Utils.Enable Containerized Services [ ${master_controller} ]
+20190402 06:42:02.621 - INFO - +--- START KW: BuiltIn.Evaluate [ "controller" in """${host}""" ]
+20190402 06:42:02.621 - INFO - ${is_controller} = True
+20190402 06:42:02.621 - INFO - +--- END KW: BuiltIn.Evaluate (0)
+20190402 06:42:02.621 - INFO - +--- START KW: BuiltIn.Run Keyword If [ ${is_controller}==True | Run Command | system host-label-assign ${host} openstack-control-plane=enabled | True ]
+20190402 06:42:02.622 - INFO - +---- START KW: Utils.Run Command [ system host-label-assign ${host} openstack-control-plane=enabled | True ]
+20190402 06:42:02.622 - INFO - +----- START KW: SSHLibrary.Set Client Configuration [ timeout=${timeout} | prompt=$ ]
+20190402 06:42:02.622 - INFO - +----- END KW: SSHLibrary.Set Client Configuration (0)
+20190402 06:42:02.622 - INFO - +----- START KW: Utils.Create Empy Result Dictionary [ ]
+20190402 06:42:02.622 - INFO - +------ START KW: BuiltIn.Create Dictionary [ stdout=${EMPTY} ]
+20190402 06:42:02.623 - INFO - &{result_dict} = { stdout= }
+20190402 06:42:02.623 - INFO - +------ END KW: BuiltIn.Create Dictionary (1)
+20190402 06:42:02.623 - INFO - +------ START KW: Collections.Set To Dictionary [ ${result_dict} | stderr=${EMPTY} ]
+20190402 06:42:02.623 - INFO - +------ END KW: Collections.Set To Dictionary (0)
+20190402 06:42:02.623 - INFO - +------ START KW: Collections.Set To Dictionary [ ${result_dict} | rc=${EMPTY} ]
+20190402 06:42:02.623 - INFO - +------ END KW: Collections.Set To Dictionary (0)
+20190402 06:42:02.624 - INFO - &{result} = { stdout= | stderr= | rc= }
+20190402 06:42:02.624 - INFO - +----- END KW: Utils.Create Empy Result Dictionary (2)
+20190402 06:42:02.624 - INFO - +----- START KW: SSHLibrary.Read [ ]
+20190402 06:42:02.624 - INFO - [wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:42:02.624 - INFO - +----- END KW: SSHLibrary.Read (0)
+20190402 06:42:02.624 - INFO - +----- START KW: SSHLibrary.Write [ ${cmd} ]
+20190402 06:42:02.633 - INFO - system host-label-assign controller-0  openstack-control-plane=enabled
+20190402 06:42:02.633 - INFO - +----- END KW: SSHLibrary.Write (9)
+20190402 06:42:02.633 - INFO - +----- START KW: SSHLibrary.Read Until Prompt [ ]
+20190402 06:42:03.647 - INFO - Host must be locked.
+[wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:42:03.647 - INFO - ${output} = Host must be locked.
+[wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:42:03.647 - INFO - +----- END KW: SSHLibrary.Read Until Prompt (1014)
+20190402 06:42:03.647 - INFO - +----- START KW: Utils.Remove Prompt Line [ ${output} ]
+20190402 06:42:03.648 - INFO - +------ START KW: String.Get Line [ ${output} | -1 ]
+20190402 06:42:03.648 - INFO - ${line_to_remove} = [wrsroot@controller-0 ~(keystone_admin)]$
+20190402 06:42:03.648 - INFO - +------ END KW: String.Get Line (0)
+20190402 06:42:03.648 - INFO - +------ START KW: String.Remove String [ ${output} | ${line_to_remove} ]
+20190402 06:42:03.648 - INFO - ${clean_out} = Host must be locked.
+20190402 06:42:03.648 - INFO - +------ END KW: String.Remove String (0)
+20190402 06:42:03.648 - INFO - ${output} = Host must be locked.
+20190402 06:42:03.648 - INFO - +----- END KW: Utils.Remove Prompt Line (1)
+20190402 06:42:03.649 - INFO - +----- START KW: Utils.Get Return Code [ ]
+20190402 06:42:03.649 - INFO - +------ START KW: SSHLibrary.Write [ echo $? ]
+20190402 06:42:03.650 - INFO - echo $?
+20190402 06:42:03.650 - INFO - +------ END KW: SSHLibrary.Write (1)
+20190402 06:42:03.650 - INFO - +------ START KW: SSHLibrary.Read Until Regexp [ [0-9]+ ]
+20190402 06:42:03.650 - INFO - 1
+20190402 06:42:03.650 - INFO - ${rc} = 1
+20190402 06:42:03.651 - INFO - +------ END KW: SSHLibrary.Read Until Regexp (1)
+20190402 06:42:03.651 - INFO - +------ START KW: BuiltIn.Log [ ${rc} ]
+20190402 06:42:03.651 - INFO - 1
+20190402 06:42:03.651 - INFO - +------ END KW: BuiltIn.Log (0)
+20190402 06:42:03.651 - INFO - ${rc} = 1
+20190402 06:42:03.651 - INFO - +----- END KW: Utils.Get Return Code (2)
+20190402 06:42:03.651 - INFO - +----- START KW: BuiltIn.Run Keyword If [ ${rc} == 0 | Set To Dictionary | ${result} | stdout=${output.strip()} | ELSE IF | ${fail_if_error} == True | FAIL | ${output} | ELSE | Set To Dictionary | ${result} | stderr=${output} ]
+20190402 06:42:03.652 - INFO - +------ START KW: BuiltIn.Fail [ ${output} ]
+20190402 06:42:03.652 - FAIL - Host must be locked.
+20190402 06:42:03.652 - DEBUG - Traceback (most recent call last):
+  None
+20190402 06:42:03.652 - INFO - +------ END KW: BuiltIn.Fail (0)
+20190402 06:42:03.652 - INFO - +----- END KW: BuiltIn.Run Keyword If (1)
+20190402 06:42:03.652 - INFO - +---- END KW: Utils.Run Command (1030)
+20190402 06:42:03.652 - INFO - +--- END KW: BuiltIn.Run Keyword If (1031)
+20190402 06:42:03.653 - INFO - +-- END KW: Utils.Enable Containerized Services (1031)
+------------------------------------------------------------------------------
+20190402 06:42:03.653 - INFO - +- END TEST: Provisioning Duplex System (1033)
+------------------------------------------------------------------------------
+20190402 06:42:03.654 - INFO - + END SUITE: Provision-Containers (2671)
+==============================================================================

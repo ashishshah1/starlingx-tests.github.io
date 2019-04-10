@@ -1,0 +1,1962 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot rpa="false" generated="20190402 06:51:12.431" generator="Robot 3.1.1 (Python 2.7.15 on linux2)">
+<suite source="/home/mgperezi/duplex/stx-test-suite/Tests/Provision-Containers.robot" id="s1" name="Provision-Containers">
+<kw type="setup" name="Run Keywords" library="BuiltIn">
+<doc>Executes all the given keywords in a sequence.</doc>
+<arguments>
+<arg>Utils.Stx Suite Setup</arg>
+<arg>provisioning.Assign Data Interfaces</arg>
+</arguments>
+<kw name="Stx Suite Setup" library="Utils">
+<doc>Wrapper to setup the environment needed for exercise
+StarlingX features</doc>
+<kw name="Open Master Controller Connection" library="Utils">
+<doc>Establish a SSH connection with the master controller
+to start executing the the suite.</doc>
+<kw name="Connect to Controller Node" library="Utils">
+<doc>Stablish a SSH connection to the controller and return
+the connection id</doc>
+<arguments>
+<arg>${CONFIG.credentials.STX_DEPLOY_USER_NAME}</arg>
+<arg>${CONFIG.credentials.STX_DEPLOY_USER_PSWD}</arg>
+<arg>${CONFIG.general.IP_UNIT_0_ADDRESS}</arg>
+</arguments>
+<assign>
+<var>${master_controller_connection}</var>
+</assign>
+<kw name="Open Connection" library="SSHLibrary">
+<doc>Opens a new SSH connection to the given ``host`` and ``port``.</doc>
+<arguments>
+<arg>${ip_address} prompt=${prompt}</arg>
+<arg>timeout=${timeout}</arg>
+</arguments>
+<assign>
+<var>${controller_connection}</var>
+</assign>
+<msg timestamp="20190402 06:51:12.568" level="INFO">${controller_connection} = 1</msg>
+<status status="PASS" endtime="20190402 06:51:12.568" starttime="20190402 06:51:12.568"></status>
+</kw>
+<kw name="Flexible_SSH_Login" library="Utils">
+<doc>On active SSH session: if given non-empty password,
+do Login, else do Login With Public Key.</doc>
+<arguments>
+<arg>${user}</arg>
+<arg>${password}</arg>
+</arguments>
+<kw name="Get Length" library="BuiltIn">
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<arguments>
+<arg>${password}</arg>
+</arguments>
+<assign>
+<var>${pwd_length}</var>
+</assign>
+<msg timestamp="20190402 06:51:12.569" level="INFO">Length is 10</msg>
+<msg timestamp="20190402 06:51:12.569" level="INFO">${pwd_length} = 10</msg>
+<status status="PASS" endtime="20190402 06:51:12.569" starttime="20190402 06:51:12.569"></status>
+</kw>
+<kw name="Run Keyword And Return If" library="BuiltIn">
+<doc>Runs the specified keyword and returns from the enclosing user keyword.</doc>
+<arguments>
+<arg>${pwd_length} &gt; 0</arg>
+<arg>SSHLibrary.Login</arg>
+<arg>${user}</arg>
+<arg>${password}</arg>
+<arg>delay=${delay}</arg>
+</arguments>
+<kw name="Login" library="SSHLibrary">
+<doc>Logs into the SSH server with the given ``username`` and ``password``.</doc>
+<arguments>
+<arg>${user}</arg>
+<arg>${password}</arg>
+<arg>delay=${delay}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:12.570" level="INFO">Logging into '192.168.200.76 prompt=$:22' as 'wrsroot'.</msg>
+<msg timestamp="20190402 06:51:13.741" level="INFO">Read output: Last login: Tue Apr  2 12:33:15 2019 from 192.168.200.60
+/etc/motd.d/00-header:
+
+[H[2J
+WARNING: Unauthorized access to this system is forbidden and will be
+prosecuted by law. By accessing this system, you agree that your
+actions may be monitored if unauthorized usage is suspected.
+
+controller-0:~$</msg>
+<msg timestamp="20190402 06:51:13.742" level="INFO">/home/mgperezi/duplex/stx-test-suite/Maria/lib/python2.7/site-packages/paramiko/kex_ecdh_nist.py:39: CryptographyDeprecationWarning: encode_point has been deprecated on EllipticCurvePublicNumbers and will be removed in a future version. Please use EllipticCurvePublicKey.public_bytes to obtain both compressed and uncompressed point encoding.
+  m.add_string(self.Q_C.public_numbers().encode_point())
+/home/mgperezi/duplex/stx-test-suite/Maria/lib/python2.7/site-packages/paramiko/kex_ecdh_nist.py:96: CryptographyDeprecationWarning: Support for unsafe construction of public numbers from encoded data will be removed in a future version. Please use EllipticCurvePublicKey.from_encoded_point
+  self.curve, Q_S_bytes
+/home/mgperezi/duplex/stx-test-suite/Maria/lib/python2.7/site-packages/paramiko/kex_ecdh_nist.py:111: CryptographyDeprecationWarning: encode_point has been deprecated on EllipticCurvePublicNumbers and will be removed in a future version. Please use EllipticCurvePublicKey.public_bytes to obtain both compressed and uncompressed point encoding.
+  hm.add_string(self.Q_C.public_numbers().encode_point())</msg>
+<status status="PASS" endtime="20190402 06:51:13.742" starttime="20190402 06:51:12.569"></status>
+</kw>
+<msg timestamp="20190402 06:51:13.743" level="INFO">Returning from the enclosing user keyword.</msg>
+<status status="PASS" endtime="20190402 06:51:13.743" starttime="20190402 06:51:12.569"></status>
+</kw>
+<status status="PASS" endtime="20190402 06:51:13.744" starttime="20190402 06:51:12.568"></status>
+</kw>
+<msg timestamp="20190402 06:51:13.744" level="INFO">${master_controller_connection} = 1</msg>
+<status status="PASS" endtime="20190402 06:51:13.744" starttime="20190402 06:51:12.568"></status>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${master_controller_connection}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:13.746" level="INFO">${master_controller_connection} = 1</msg>
+<status status="PASS" endtime="20190402 06:51:13.746" starttime="20190402 06:51:13.745"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${master_controller_connection}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:13.747" level="INFO">1</msg>
+<status status="PASS" endtime="20190402 06:51:13.747" starttime="20190402 06:51:13.746"></status>
+</kw>
+<status status="PASS" endtime="20190402 06:51:13.747" starttime="20190402 06:51:12.567"></status>
+</kw>
+<kw name="Set Env Vars From Openrc" library="Utils">
+<doc>Sources the openrc form /etc/nova/ to have the admin
+variables exported on the controller.</doc>
+<kw name="Run Command" library="Utils">
+<doc>Execute a command on controller over ssh connection
+keeping environment visible to the subsequent keywords.Also allows
+the keyword to fail if there is an error, by default this keyword
+will not fail and will return the stderr.</doc>
+<arguments>
+<arg>source /etc/platform/openrc</arg>
+<arg>True</arg>
+</arguments>
+<kw name="Set Client Configuration" library="SSHLibrary">
+<doc>Update the `configuration` of the current connection.</doc>
+<arguments>
+<arg>timeout=${timeout}</arg>
+<arg>prompt=$</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:13.748" starttime="20190402 06:51:13.748"></status>
+</kw>
+<kw name="Create Empy Result Dictionary" library="Utils">
+<doc>Creates an Empty Dictionary with the required structure
+for a response of executed command.</doc>
+<assign>
+<var>&amp;{result}</var>
+</assign>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>stdout=${EMPTY}</arg>
+</arguments>
+<assign>
+<var>&amp;{result_dict}</var>
+</assign>
+<msg timestamp="20190402 06:51:13.749" level="INFO">&amp;{result_dict} = { stdout= }</msg>
+<status status="PASS" endtime="20190402 06:51:13.749" starttime="20190402 06:51:13.748"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result_dict}</arg>
+<arg>stderr=${EMPTY}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:13.749" starttime="20190402 06:51:13.749"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result_dict}</arg>
+<arg>rc=${EMPTY}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:13.749" starttime="20190402 06:51:13.749"></status>
+</kw>
+<msg timestamp="20190402 06:51:13.750" level="INFO">&amp;{result} = { stdout= | stderr= | rc= }</msg>
+<status status="PASS" endtime="20190402 06:51:13.750" starttime="20190402 06:51:13.748"></status>
+</kw>
+<kw name="Read" library="SSHLibrary">
+<doc>Consumes and returns everything available on the server output.</doc>
+<status status="PASS" endtime="20190402 06:51:13.750" starttime="20190402 06:51:13.750"></status>
+</kw>
+<kw name="Write" library="SSHLibrary">
+<doc>Writes the given ``text`` on the remote machine and appends a newline.</doc>
+<arguments>
+<arg>${cmd}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:13.755" level="INFO">source /etc/platform/openrc</msg>
+<status status="PASS" endtime="20190402 06:51:13.755" starttime="20190402 06:51:13.750"></status>
+</kw>
+<kw name="Read Until Prompt" library="SSHLibrary">
+<doc>Consumes and returns the server output until the prompt is found.</doc>
+<assign>
+<var>${output}</var>
+</assign>
+<msg timestamp="20190402 06:51:14.124" level="INFO">[wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<msg timestamp="20190402 06:51:14.125" level="INFO">${output} = [wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<status status="PASS" endtime="20190402 06:51:14.125" starttime="20190402 06:51:13.755"></status>
+</kw>
+<kw name="Remove Prompt Line" library="Utils">
+<doc>On the response of the command execution is also
+retrieved the prompt line (because the use of Read until prompt)
+this keyword delete that last line and returns a clean output.</doc>
+<arguments>
+<arg>${output}</arg>
+</arguments>
+<assign>
+<var>${output}</var>
+</assign>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${output}</arg>
+<arg>-1</arg>
+</arguments>
+<assign>
+<var>${line_to_remove}</var>
+</assign>
+<msg timestamp="20190402 06:51:14.125" level="INFO">${line_to_remove} = [wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<status status="PASS" endtime="20190402 06:51:14.125" starttime="20190402 06:51:14.125"></status>
+</kw>
+<kw name="Remove String" library="String">
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<arguments>
+<arg>${output}</arg>
+<arg>${line_to_remove}</arg>
+</arguments>
+<assign>
+<var>${clean_out}</var>
+</assign>
+<msg timestamp="20190402 06:51:14.126" level="INFO">${clean_out} = </msg>
+<status status="PASS" endtime="20190402 06:51:14.126" starttime="20190402 06:51:14.126"></status>
+</kw>
+<msg timestamp="20190402 06:51:14.126" level="INFO">${output} = </msg>
+<status status="PASS" endtime="20190402 06:51:14.126" starttime="20190402 06:51:14.125"></status>
+</kw>
+<kw name="Get Return Code" library="Utils">
+<doc>Wrapper to return the code number of last executed
+command</doc>
+<assign>
+<var>${rc}</var>
+</assign>
+<kw name="Write" library="SSHLibrary">
+<doc>Writes the given ``text`` on the remote machine and appends a newline.</doc>
+<arguments>
+<arg>echo $?</arg>
+</arguments>
+<msg timestamp="20190402 06:51:14.128" level="INFO">echo $?</msg>
+<status status="PASS" endtime="20190402 06:51:14.129" starttime="20190402 06:51:14.126"></status>
+</kw>
+<kw name="Read Until Regexp" library="SSHLibrary">
+<doc>Consumes and returns the server output until a match to ``regexp`` is found.</doc>
+<arguments>
+<arg>[0-9]+</arg>
+</arguments>
+<assign>
+<var>${rc}</var>
+</assign>
+<msg timestamp="20190402 06:51:14.129" level="INFO">0</msg>
+<msg timestamp="20190402 06:51:14.129" level="INFO">${rc} = 0</msg>
+<status status="PASS" endtime="20190402 06:51:14.129" starttime="20190402 06:51:14.129"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${rc}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:14.130" level="INFO">0</msg>
+<status status="PASS" endtime="20190402 06:51:14.130" starttime="20190402 06:51:14.129"></status>
+</kw>
+<msg timestamp="20190402 06:51:14.130" level="INFO">${rc} = 0</msg>
+<status status="PASS" endtime="20190402 06:51:14.130" starttime="20190402 06:51:14.126"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${rc} == 0</arg>
+<arg>Set To Dictionary</arg>
+<arg>${result}</arg>
+<arg>stdout=${output.strip()}</arg>
+<arg>ELSE IF</arg>
+<arg>${fail_if_error} == True</arg>
+<arg>FAIL</arg>
+<arg>${output}</arg>
+<arg>ELSE</arg>
+<arg>Set To Dictionary</arg>
+<arg>${result}</arg>
+<arg>stderr=${output}</arg>
+</arguments>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result}</arg>
+<arg>stdout=${output.strip()}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:14.131" starttime="20190402 06:51:14.131"></status>
+</kw>
+<status status="PASS" endtime="20190402 06:51:14.131" starttime="20190402 06:51:14.130"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result}</arg>
+<arg>rc=${rc}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:14.131" starttime="20190402 06:51:14.131"></status>
+</kw>
+<kw name="Log Dictionary" library="Collections">
+<doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
+<arguments>
+<arg>${result}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:14.131" level="INFO">Dictionary size is 3 and it contains following items:
+rc: 0
+stderr: 
+stdout: </msg>
+<status status="PASS" endtime="20190402 06:51:14.131" starttime="20190402 06:51:14.131"></status>
+</kw>
+<status status="PASS" endtime="20190402 06:51:14.132" starttime="20190402 06:51:13.747"></status>
+</kw>
+<status status="PASS" endtime="20190402 06:51:14.132" starttime="20190402 06:51:13.747"></status>
+</kw>
+<status status="PASS" endtime="20190402 06:51:14.132" starttime="20190402 06:51:12.567"></status>
+</kw>
+<kw name="Assign Data Interfaces" library="provisioning">
+<doc>Set variables for Data interfaces according to the
+configuration selected</doc>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${ENVIRONMENT}'=='virtual'</arg>
+<arg>Create List</arg>
+<arg>eth1000</arg>
+<arg>eth1001</arg>
+<arg>ELSE</arg>
+<arg>Create List</arg>
+<arg>enp24s0f0</arg>
+<arg>enp24s0f1</arg>
+</arguments>
+<assign>
+<var>@{data_interfaces}</var>
+</assign>
+<kw name="Create List" library="BuiltIn">
+<doc>Returns a list containing given items.</doc>
+<arguments>
+<arg>enp24s0f0</arg>
+<arg>enp24s0f1</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:14.133" starttime="20190402 06:51:14.132"></status>
+</kw>
+<msg timestamp="20190402 06:51:14.133" level="INFO">@{data_interfaces} = [ enp24s0f0 | enp24s0f1 ]</msg>
+<status status="PASS" endtime="20190402 06:51:14.133" starttime="20190402 06:51:14.132"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${data_interfaces}</arg>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${data0if}</var>
+</assign>
+<msg timestamp="20190402 06:51:14.133" level="INFO">${data0if} = enp24s0f0</msg>
+<status status="PASS" endtime="20190402 06:51:14.133" starttime="20190402 06:51:14.133"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${data_interfaces}</arg>
+<arg>1</arg>
+</arguments>
+<assign>
+<var>${data1if}</var>
+</assign>
+<msg timestamp="20190402 06:51:14.134" level="INFO">${data1if} = enp24s0f1</msg>
+<status status="PASS" endtime="20190402 06:51:14.134" starttime="20190402 06:51:14.133"></status>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${data0if}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:14.134" level="INFO">${data0if} = enp24s0f0</msg>
+<status status="PASS" endtime="20190402 06:51:14.134" starttime="20190402 06:51:14.134"></status>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${data1if}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:14.134" level="INFO">${data1if} = enp24s0f1</msg>
+<status status="PASS" endtime="20190402 06:51:14.134" starttime="20190402 06:51:14.134"></status>
+</kw>
+<status status="PASS" endtime="20190402 06:51:14.134" starttime="20190402 06:51:14.132"></status>
+</kw>
+<status status="PASS" endtime="20190402 06:51:14.134" starttime="20190402 06:51:12.567"></status>
+</kw>
+<test id="s1-t1" name="Provisioning Duplex System">
+<kw name="Set NTP Server" library="Utils">
+<doc>Setup the NTP servers for the system.</doc>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>0.pool.ntp.org,1.pool.ntp.org</arg>
+</arguments>
+<assign>
+<var>${ntp_servers}</var>
+</assign>
+<msg timestamp="20190402 06:51:14.135" level="INFO">${ntp_servers} = 0.pool.ntp.org,1.pool.ntp.org</msg>
+<status status="PASS" endtime="20190402 06:51:14.135" starttime="20190402 06:51:14.135"></status>
+</kw>
+<kw name="Run Command" library="Utils">
+<doc>Execute a command on controller over ssh connection
+keeping environment visible to the subsequent keywords.Also allows
+the keyword to fail if there is an error, by default this keyword
+will not fail and will return the stderr.</doc>
+<arguments>
+<arg>system ntp-modify ntpservers=${ntp_servers}</arg>
+</arguments>
+<kw name="Set Client Configuration" library="SSHLibrary">
+<doc>Update the `configuration` of the current connection.</doc>
+<arguments>
+<arg>timeout=${timeout}</arg>
+<arg>prompt=$</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:14.136" starttime="20190402 06:51:14.136"></status>
+</kw>
+<kw name="Create Empy Result Dictionary" library="Utils">
+<doc>Creates an Empty Dictionary with the required structure
+for a response of executed command.</doc>
+<assign>
+<var>&amp;{result}</var>
+</assign>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>stdout=${EMPTY}</arg>
+</arguments>
+<assign>
+<var>&amp;{result_dict}</var>
+</assign>
+<msg timestamp="20190402 06:51:14.137" level="INFO">&amp;{result_dict} = { stdout= }</msg>
+<status status="PASS" endtime="20190402 06:51:14.137" starttime="20190402 06:51:14.136"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result_dict}</arg>
+<arg>stderr=${EMPTY}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:14.137" starttime="20190402 06:51:14.137"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result_dict}</arg>
+<arg>rc=${EMPTY}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:14.138" starttime="20190402 06:51:14.137"></status>
+</kw>
+<msg timestamp="20190402 06:51:14.138" level="INFO">&amp;{result} = { stdout= | stderr= | rc= }</msg>
+<status status="PASS" endtime="20190402 06:51:14.138" starttime="20190402 06:51:14.136"></status>
+</kw>
+<kw name="Read" library="SSHLibrary">
+<doc>Consumes and returns everything available on the server output.</doc>
+<msg timestamp="20190402 06:51:14.138" level="INFO">[wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<status status="PASS" endtime="20190402 06:51:14.138" starttime="20190402 06:51:14.138"></status>
+</kw>
+<kw name="Write" library="SSHLibrary">
+<doc>Writes the given ``text`` on the remote machine and appends a newline.</doc>
+<arguments>
+<arg>${cmd}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:14.150" level="INFO">system ntp-modify ntpservers=0.pool.nt p.org,1.pool.ntp.org</msg>
+<status status="PASS" endtime="20190402 06:51:14.150" starttime="20190402 06:51:14.138"></status>
+</kw>
+<kw name="Read Until Prompt" library="SSHLibrary">
+<doc>Consumes and returns the server output until the prompt is found.</doc>
+<assign>
+<var>${output}</var>
+</assign>
+<msg timestamp="20190402 06:51:15.463" level="INFO">+--------------+--------------------------------------+
+| Property     | Value                                |
++--------------+--------------------------------------+
+| uuid         | 75981062-d688-4d6d-b1b2-32887c1200db |
+| enabled      | True                                 |
+| ntpservers   | 0.pool.ntp.org,1.pool.ntp.org        |
+| isystem_uuid | 76ce9d91-d770-4f94-85b0-7eebb135973e |
+| created_at   | 2019-04-02T10:06:08.063839+00:00     |
+| updated_at   | 2019-04-02T11:23:42.524874+00:00     |
++--------------+--------------------------------------+
+[wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<msg timestamp="20190402 06:51:15.464" level="INFO">${output} = +--------------+--------------------------------------+
+| Property     | Value                                |
++--------------+--------------------------------------+
+| uuid         | 75981062-d68...</msg>
+<status status="PASS" endtime="20190402 06:51:15.464" starttime="20190402 06:51:14.150"></status>
+</kw>
+<kw name="Remove Prompt Line" library="Utils">
+<doc>On the response of the command execution is also
+retrieved the prompt line (because the use of Read until prompt)
+this keyword delete that last line and returns a clean output.</doc>
+<arguments>
+<arg>${output}</arg>
+</arguments>
+<assign>
+<var>${output}</var>
+</assign>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${output}</arg>
+<arg>-1</arg>
+</arguments>
+<assign>
+<var>${line_to_remove}</var>
+</assign>
+<msg timestamp="20190402 06:51:15.465" level="INFO">${line_to_remove} = [wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<status status="PASS" endtime="20190402 06:51:15.465" starttime="20190402 06:51:15.465"></status>
+</kw>
+<kw name="Remove String" library="String">
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<arguments>
+<arg>${output}</arg>
+<arg>${line_to_remove}</arg>
+</arguments>
+<assign>
+<var>${clean_out}</var>
+</assign>
+<msg timestamp="20190402 06:51:15.465" level="INFO">${clean_out} = +--------------+--------------------------------------+
+| Property     | Value                                |
++--------------+--------------------------------------+
+| uuid         | 75981062-d68...</msg>
+<status status="PASS" endtime="20190402 06:51:15.465" starttime="20190402 06:51:15.465"></status>
+</kw>
+<msg timestamp="20190402 06:51:15.465" level="INFO">${output} = +--------------+--------------------------------------+
+| Property     | Value                                |
++--------------+--------------------------------------+
+| uuid         | 75981062-d68...</msg>
+<status status="PASS" endtime="20190402 06:51:15.465" starttime="20190402 06:51:15.464"></status>
+</kw>
+<kw name="Get Return Code" library="Utils">
+<doc>Wrapper to return the code number of last executed
+command</doc>
+<assign>
+<var>${rc}</var>
+</assign>
+<kw name="Write" library="SSHLibrary">
+<doc>Writes the given ``text`` on the remote machine and appends a newline.</doc>
+<arguments>
+<arg>echo $?</arg>
+</arguments>
+<msg timestamp="20190402 06:51:15.467" level="INFO">echo $?</msg>
+<status status="PASS" endtime="20190402 06:51:15.467" starttime="20190402 06:51:15.466"></status>
+</kw>
+<kw name="Read Until Regexp" library="SSHLibrary">
+<doc>Consumes and returns the server output until a match to ``regexp`` is found.</doc>
+<arguments>
+<arg>[0-9]+</arg>
+</arguments>
+<assign>
+<var>${rc}</var>
+</assign>
+<msg timestamp="20190402 06:51:15.468" level="INFO">0</msg>
+<msg timestamp="20190402 06:51:15.468" level="INFO">${rc} = 0</msg>
+<status status="PASS" endtime="20190402 06:51:15.468" starttime="20190402 06:51:15.468"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${rc}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:15.468" level="INFO">0</msg>
+<status status="PASS" endtime="20190402 06:51:15.468" starttime="20190402 06:51:15.468"></status>
+</kw>
+<msg timestamp="20190402 06:51:15.468" level="INFO">${rc} = 0</msg>
+<status status="PASS" endtime="20190402 06:51:15.468" starttime="20190402 06:51:15.465"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${rc} == 0</arg>
+<arg>Set To Dictionary</arg>
+<arg>${result}</arg>
+<arg>stdout=${output.strip()}</arg>
+<arg>ELSE IF</arg>
+<arg>${fail_if_error} == True</arg>
+<arg>FAIL</arg>
+<arg>${output}</arg>
+<arg>ELSE</arg>
+<arg>Set To Dictionary</arg>
+<arg>${result}</arg>
+<arg>stderr=${output}</arg>
+</arguments>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result}</arg>
+<arg>stdout=${output.strip()}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:15.469" starttime="20190402 06:51:15.469"></status>
+</kw>
+<status status="PASS" endtime="20190402 06:51:15.469" starttime="20190402 06:51:15.469"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result}</arg>
+<arg>rc=${rc}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:15.470" starttime="20190402 06:51:15.469"></status>
+</kw>
+<kw name="Log Dictionary" library="Collections">
+<doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
+<arguments>
+<arg>${result}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:15.470" level="INFO">Dictionary size is 3 and it contains following items:
+rc: 0
+stderr: 
+stdout: +--------------+--------------------------------------+
+| Property     | Value                                |
++--------------+--------------------------------------+
+| uuid         | 75981062-d688-4d6d-b1b2-32887c1200db |
+| enabled      | True                                 |
+| ntpservers   | 0.pool.ntp.org,1.pool.ntp.org        |
+| isystem_uuid | 76ce9d91-d770-4f94-85b0-7eebb135973e |
+| created_at   | 2019-04-02T10:06:08.063839+00:00     |
+| updated_at   | 2019-04-02T11:23:42.524874+00:00     |
++--------------+--------------------------------------+</msg>
+<status status="PASS" endtime="20190402 06:51:15.470" starttime="20190402 06:51:15.470"></status>
+</kw>
+<status status="PASS" endtime="20190402 06:51:15.470" starttime="20190402 06:51:14.136"></status>
+</kw>
+<status status="PASS" endtime="20190402 06:51:15.470" starttime="20190402 06:51:14.135"></status>
+</kw>
+<kw name="Configure Data Interfaces" library="Utils">
+<doc>Configure data interfaces with proper values.</doc>
+<arguments>
+<arg>${master_controller}</arg>
+<arg>${data0if}</arg>
+<arg>${data1if}</arg>
+<arg>${physnet0}</arg>
+<arg>${physnet1}</arg>
+<arg>${mtu}</arg>
+</arguments>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${host}'=='controller-1'</arg>
+<arg>Run Keywords</arg>
+<arg>Provide OAM Network Interface</arg>
+<arg>${host}</arg>
+<arg>AND</arg>
+<arg>Setup Cluster-host Interfaces</arg>
+<arg>${host}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:15.471" starttime="20190402 06:51:15.471"></status>
+</kw>
+<kw name="Get Interface Information" library="Utils">
+<doc>Returns a dictionary with the values of the spcecified
+interface.</doc>
+<arguments>
+<arg>${host}</arg>
+<arg>${data0if}</arg>
+</arguments>
+<assign>
+<var>${iface_info}</var>
+</assign>
+<kw name="Catenate" library="BuiltIn">
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<arguments>
+<arg>SEPARATOR=|</arg>
+<arg>system host-port-list ${host} --nowrap</arg>
+<arg>grep ${interface}</arg>
+<arg>awk '{ print $2,$4,$8}'</arg>
+</arguments>
+<assign>
+<var>${cmd}</var>
+</assign>
+<msg timestamp="20190402 06:51:15.472" level="INFO">${cmd} = system host-port-list controller-0 --nowrap|grep enp24s0f0|awk '{ print $2,$4,$8}'</msg>
+<status status="PASS" endtime="20190402 06:51:15.472" starttime="20190402 06:51:15.472"></status>
+</kw>
+<kw name="Run Command" library="Utils">
+<doc>Execute a command on controller over ssh connection
+keeping environment visible to the subsequent keywords.Also allows
+the keyword to fail if there is an error, by default this keyword
+will not fail and will return the stderr.</doc>
+<arguments>
+<arg>${cmd}</arg>
+</arguments>
+<assign>
+<var>${info}</var>
+</assign>
+<kw name="Set Client Configuration" library="SSHLibrary">
+<doc>Update the `configuration` of the current connection.</doc>
+<arguments>
+<arg>timeout=${timeout}</arg>
+<arg>prompt=$</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:15.473" starttime="20190402 06:51:15.472"></status>
+</kw>
+<kw name="Create Empy Result Dictionary" library="Utils">
+<doc>Creates an Empty Dictionary with the required structure
+for a response of executed command.</doc>
+<assign>
+<var>&amp;{result}</var>
+</assign>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>stdout=${EMPTY}</arg>
+</arguments>
+<assign>
+<var>&amp;{result_dict}</var>
+</assign>
+<msg timestamp="20190402 06:51:15.473" level="INFO">&amp;{result_dict} = { stdout= }</msg>
+<status status="PASS" endtime="20190402 06:51:15.473" starttime="20190402 06:51:15.473"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result_dict}</arg>
+<arg>stderr=${EMPTY}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:15.474" starttime="20190402 06:51:15.473"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result_dict}</arg>
+<arg>rc=${EMPTY}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:15.474" starttime="20190402 06:51:15.474"></status>
+</kw>
+<msg timestamp="20190402 06:51:15.474" level="INFO">&amp;{result} = { stdout= | stderr= | rc= }</msg>
+<status status="PASS" endtime="20190402 06:51:15.474" starttime="20190402 06:51:15.473"></status>
+</kw>
+<kw name="Read" library="SSHLibrary">
+<doc>Consumes and returns everything available on the server output.</doc>
+<msg timestamp="20190402 06:51:15.474" level="INFO">[wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<status status="PASS" endtime="20190402 06:51:15.474" starttime="20190402 06:51:15.474"></status>
+</kw>
+<kw name="Write" library="SSHLibrary">
+<doc>Writes the given ``text`` on the remote machine and appends a newline.</doc>
+<arguments>
+<arg>${cmd}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:15.492" level="INFO">system host-port-list controller-0 --n owrap|grep enp24s0f0|awk '{ print $2,$4,$8}'</msg>
+<status status="PASS" endtime="20190402 06:51:15.492" starttime="20190402 06:51:15.475"></status>
+</kw>
+<kw name="Read Until Prompt" library="SSHLibrary">
+<doc>Consumes and returns the server output until the prompt is found.</doc>
+<assign>
+<var>${output}</var>
+</assign>
+<msg timestamp="20190402 06:51:16.517" level="INFO">6ef9bf2a-1a6f-4d1e-8890-3f621879b8f6 enp24s0f0 0000:18:00.0
+[wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<msg timestamp="20190402 06:51:16.517" level="INFO">${output} = 6ef9bf2a-1a6f-4d1e-8890-3f621879b8f6 enp24s0f0 0000:18:00.0
+[wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<status status="PASS" endtime="20190402 06:51:16.517" starttime="20190402 06:51:15.492"></status>
+</kw>
+<kw name="Remove Prompt Line" library="Utils">
+<doc>On the response of the command execution is also
+retrieved the prompt line (because the use of Read until prompt)
+this keyword delete that last line and returns a clean output.</doc>
+<arguments>
+<arg>${output}</arg>
+</arguments>
+<assign>
+<var>${output}</var>
+</assign>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${output}</arg>
+<arg>-1</arg>
+</arguments>
+<assign>
+<var>${line_to_remove}</var>
+</assign>
+<msg timestamp="20190402 06:51:16.518" level="INFO">${line_to_remove} = [wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<status status="PASS" endtime="20190402 06:51:16.518" starttime="20190402 06:51:16.518"></status>
+</kw>
+<kw name="Remove String" library="String">
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<arguments>
+<arg>${output}</arg>
+<arg>${line_to_remove}</arg>
+</arguments>
+<assign>
+<var>${clean_out}</var>
+</assign>
+<msg timestamp="20190402 06:51:16.518" level="INFO">${clean_out} = 6ef9bf2a-1a6f-4d1e-8890-3f621879b8f6 enp24s0f0 0000:18:00.0
+</msg>
+<status status="PASS" endtime="20190402 06:51:16.519" starttime="20190402 06:51:16.518"></status>
+</kw>
+<msg timestamp="20190402 06:51:16.519" level="INFO">${output} = 6ef9bf2a-1a6f-4d1e-8890-3f621879b8f6 enp24s0f0 0000:18:00.0
+</msg>
+<status status="PASS" endtime="20190402 06:51:16.519" starttime="20190402 06:51:16.518"></status>
+</kw>
+<kw name="Get Return Code" library="Utils">
+<doc>Wrapper to return the code number of last executed
+command</doc>
+<assign>
+<var>${rc}</var>
+</assign>
+<kw name="Write" library="SSHLibrary">
+<doc>Writes the given ``text`` on the remote machine and appends a newline.</doc>
+<arguments>
+<arg>echo $?</arg>
+</arguments>
+<msg timestamp="20190402 06:51:16.521" level="INFO">echo $?</msg>
+<status status="PASS" endtime="20190402 06:51:16.521" starttime="20190402 06:51:16.519"></status>
+</kw>
+<kw name="Read Until Regexp" library="SSHLibrary">
+<doc>Consumes and returns the server output until a match to ``regexp`` is found.</doc>
+<arguments>
+<arg>[0-9]+</arg>
+</arguments>
+<assign>
+<var>${rc}</var>
+</assign>
+<msg timestamp="20190402 06:51:16.521" level="INFO">0</msg>
+<msg timestamp="20190402 06:51:16.522" level="INFO">${rc} = 0</msg>
+<status status="PASS" endtime="20190402 06:51:16.522" starttime="20190402 06:51:16.521"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${rc}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:16.522" level="INFO">0</msg>
+<status status="PASS" endtime="20190402 06:51:16.522" starttime="20190402 06:51:16.522"></status>
+</kw>
+<msg timestamp="20190402 06:51:16.522" level="INFO">${rc} = 0</msg>
+<status status="PASS" endtime="20190402 06:51:16.522" starttime="20190402 06:51:16.519"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${rc} == 0</arg>
+<arg>Set To Dictionary</arg>
+<arg>${result}</arg>
+<arg>stdout=${output.strip()}</arg>
+<arg>ELSE IF</arg>
+<arg>${fail_if_error} == True</arg>
+<arg>FAIL</arg>
+<arg>${output}</arg>
+<arg>ELSE</arg>
+<arg>Set To Dictionary</arg>
+<arg>${result}</arg>
+<arg>stderr=${output}</arg>
+</arguments>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result}</arg>
+<arg>stdout=${output.strip()}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:16.523" starttime="20190402 06:51:16.523"></status>
+</kw>
+<status status="PASS" endtime="20190402 06:51:16.523" starttime="20190402 06:51:16.522"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result}</arg>
+<arg>rc=${rc}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:16.523" starttime="20190402 06:51:16.523"></status>
+</kw>
+<kw name="Log Dictionary" library="Collections">
+<doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
+<arguments>
+<arg>${result}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:16.523" level="INFO">Dictionary size is 3 and it contains following items:
+rc: 0
+stderr: 
+stdout: 6ef9bf2a-1a6f-4d1e-8890-3f621879b8f6 enp24s0f0 0000:18:00.0</msg>
+<status status="PASS" endtime="20190402 06:51:16.523" starttime="20190402 06:51:16.523"></status>
+</kw>
+<msg timestamp="20190402 06:51:16.524" level="INFO">${info} = {u'stdout': u'6ef9bf2a-1a6f-4d1e-8890-3f621879b8f6 enp24s0f0 0000:18:00.0', u'stderr': u'', u'rc': u'0'}</msg>
+<status status="PASS" endtime="20190402 06:51:16.524" starttime="20190402 06:51:15.472"></status>
+</kw>
+<kw name="Convert Response To List" library="Utils">
+<doc>Given a response dictionary, gets the stdout and split
+it by spaces and return it as a list.</doc>
+<arguments>
+<arg>${info}</arg>
+</arguments>
+<assign>
+<var>${info}</var>
+</assign>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${result}</arg>
+<arg>stdout</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20190402 06:51:16.524" level="INFO">${response} = 6ef9bf2a-1a6f-4d1e-8890-3f621879b8f6 enp24s0f0 0000:18:00.0</msg>
+<status status="PASS" endtime="20190402 06:51:16.524" starttime="20190402 06:51:16.524"></status>
+</kw>
+<kw name="Split String" library="String">
+<doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
+<arguments>
+<arg>${response}</arg>
+</arguments>
+<assign>
+<var>@{res_in_list}</var>
+</assign>
+<msg timestamp="20190402 06:51:16.525" level="INFO">@{res_in_list} = [ 6ef9bf2a-1a6f-4d1e-8890-3f621879b8f6 | enp24s0f0 | 0000:18:00.0 ]</msg>
+<status status="PASS" endtime="20190402 06:51:16.525" starttime="20190402 06:51:16.524"></status>
+</kw>
+<msg timestamp="20190402 06:51:16.525" level="INFO">${info} = [u'6ef9bf2a-1a6f-4d1e-8890-3f621879b8f6', u'enp24s0f0', u'0000:18:00.0']</msg>
+<status status="PASS" endtime="20190402 06:51:16.525" starttime="20190402 06:51:16.524"></status>
+</kw>
+<msg timestamp="20190402 06:51:16.525" level="INFO">${iface_info} = [u'6ef9bf2a-1a6f-4d1e-8890-3f621879b8f6', u'enp24s0f0', u'0000:18:00.0']</msg>
+<status status="PASS" endtime="20190402 06:51:16.525" starttime="20190402 06:51:15.471"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${iface_info}</arg>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${data0portuuid}</var>
+</assign>
+<msg timestamp="20190402 06:51:16.525" level="INFO">${data0portuuid} = 6ef9bf2a-1a6f-4d1e-8890-3f621879b8f6</msg>
+<status status="PASS" endtime="20190402 06:51:16.525" starttime="20190402 06:51:16.525"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${iface_info}</arg>
+<arg>1</arg>
+</arguments>
+<assign>
+<var>${data0portname}</var>
+</assign>
+<msg timestamp="20190402 06:51:16.526" level="INFO">${data0portname} = enp24s0f0</msg>
+<status status="PASS" endtime="20190402 06:51:16.526" starttime="20190402 06:51:16.525"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${iface_info}</arg>
+<arg>2</arg>
+</arguments>
+<assign>
+<var>${data0pciaddr}</var>
+</assign>
+<msg timestamp="20190402 06:51:16.526" level="INFO">${data0pciaddr} = 0000:18:00.0</msg>
+<status status="PASS" endtime="20190402 06:51:16.526" starttime="20190402 06:51:16.526"></status>
+</kw>
+<kw name="Get Interface Information" library="Utils">
+<doc>Returns a dictionary with the values of the spcecified
+interface.</doc>
+<arguments>
+<arg>${host}</arg>
+<arg>${data1if}</arg>
+</arguments>
+<assign>
+<var>${iface_info}</var>
+</assign>
+<kw name="Catenate" library="BuiltIn">
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<arguments>
+<arg>SEPARATOR=|</arg>
+<arg>system host-port-list ${host} --nowrap</arg>
+<arg>grep ${interface}</arg>
+<arg>awk '{ print $2,$4,$8}'</arg>
+</arguments>
+<assign>
+<var>${cmd}</var>
+</assign>
+<msg timestamp="20190402 06:51:16.527" level="INFO">${cmd} = system host-port-list controller-0 --nowrap|grep enp24s0f1|awk '{ print $2,$4,$8}'</msg>
+<status status="PASS" endtime="20190402 06:51:16.527" starttime="20190402 06:51:16.527"></status>
+</kw>
+<kw name="Run Command" library="Utils">
+<doc>Execute a command on controller over ssh connection
+keeping environment visible to the subsequent keywords.Also allows
+the keyword to fail if there is an error, by default this keyword
+will not fail and will return the stderr.</doc>
+<arguments>
+<arg>${cmd}</arg>
+</arguments>
+<assign>
+<var>${info}</var>
+</assign>
+<kw name="Set Client Configuration" library="SSHLibrary">
+<doc>Update the `configuration` of the current connection.</doc>
+<arguments>
+<arg>timeout=${timeout}</arg>
+<arg>prompt=$</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:16.527" starttime="20190402 06:51:16.527"></status>
+</kw>
+<kw name="Create Empy Result Dictionary" library="Utils">
+<doc>Creates an Empty Dictionary with the required structure
+for a response of executed command.</doc>
+<assign>
+<var>&amp;{result}</var>
+</assign>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>stdout=${EMPTY}</arg>
+</arguments>
+<assign>
+<var>&amp;{result_dict}</var>
+</assign>
+<msg timestamp="20190402 06:51:16.528" level="INFO">&amp;{result_dict} = { stdout= }</msg>
+<status status="PASS" endtime="20190402 06:51:16.528" starttime="20190402 06:51:16.528"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result_dict}</arg>
+<arg>stderr=${EMPTY}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:16.529" starttime="20190402 06:51:16.528"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result_dict}</arg>
+<arg>rc=${EMPTY}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:16.529" starttime="20190402 06:51:16.529"></status>
+</kw>
+<msg timestamp="20190402 06:51:16.529" level="INFO">&amp;{result} = { stdout= | stderr= | rc= }</msg>
+<status status="PASS" endtime="20190402 06:51:16.529" starttime="20190402 06:51:16.528"></status>
+</kw>
+<kw name="Read" library="SSHLibrary">
+<doc>Consumes and returns everything available on the server output.</doc>
+<msg timestamp="20190402 06:51:16.529" level="INFO">[wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<status status="PASS" endtime="20190402 06:51:16.529" starttime="20190402 06:51:16.529"></status>
+</kw>
+<kw name="Write" library="SSHLibrary">
+<doc>Writes the given ``text`` on the remote machine and appends a newline.</doc>
+<arguments>
+<arg>${cmd}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:16.546" level="INFO">system host-port-list controller-0 --n owrap|grep enp24s0f1|awk '{ print $2,$4,$8}'</msg>
+<status status="PASS" endtime="20190402 06:51:16.547" starttime="20190402 06:51:16.529"></status>
+</kw>
+<kw name="Read Until Prompt" library="SSHLibrary">
+<doc>Consumes and returns the server output until the prompt is found.</doc>
+<assign>
+<var>${output}</var>
+</assign>
+<msg timestamp="20190402 06:51:17.597" level="INFO">8f070dfb-c440-470d-82d3-8f5f52d7c2a4 enp24s0f1 0000:18:00.1
+[wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<msg timestamp="20190402 06:51:17.597" level="INFO">${output} = 8f070dfb-c440-470d-82d3-8f5f52d7c2a4 enp24s0f1 0000:18:00.1
+[wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<status status="PASS" endtime="20190402 06:51:17.597" starttime="20190402 06:51:16.547"></status>
+</kw>
+<kw name="Remove Prompt Line" library="Utils">
+<doc>On the response of the command execution is also
+retrieved the prompt line (because the use of Read until prompt)
+this keyword delete that last line and returns a clean output.</doc>
+<arguments>
+<arg>${output}</arg>
+</arguments>
+<assign>
+<var>${output}</var>
+</assign>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${output}</arg>
+<arg>-1</arg>
+</arguments>
+<assign>
+<var>${line_to_remove}</var>
+</assign>
+<msg timestamp="20190402 06:51:17.598" level="INFO">${line_to_remove} = [wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<status status="PASS" endtime="20190402 06:51:17.598" starttime="20190402 06:51:17.598"></status>
+</kw>
+<kw name="Remove String" library="String">
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<arguments>
+<arg>${output}</arg>
+<arg>${line_to_remove}</arg>
+</arguments>
+<assign>
+<var>${clean_out}</var>
+</assign>
+<msg timestamp="20190402 06:51:17.598" level="INFO">${clean_out} = 8f070dfb-c440-470d-82d3-8f5f52d7c2a4 enp24s0f1 0000:18:00.1
+</msg>
+<status status="PASS" endtime="20190402 06:51:17.598" starttime="20190402 06:51:17.598"></status>
+</kw>
+<msg timestamp="20190402 06:51:17.598" level="INFO">${output} = 8f070dfb-c440-470d-82d3-8f5f52d7c2a4 enp24s0f1 0000:18:00.1
+</msg>
+<status status="PASS" endtime="20190402 06:51:17.598" starttime="20190402 06:51:17.597"></status>
+</kw>
+<kw name="Get Return Code" library="Utils">
+<doc>Wrapper to return the code number of last executed
+command</doc>
+<assign>
+<var>${rc}</var>
+</assign>
+<kw name="Write" library="SSHLibrary">
+<doc>Writes the given ``text`` on the remote machine and appends a newline.</doc>
+<arguments>
+<arg>echo $?</arg>
+</arguments>
+<msg timestamp="20190402 06:51:17.600" level="INFO">echo $?</msg>
+<status status="PASS" endtime="20190402 06:51:17.600" starttime="20190402 06:51:17.599"></status>
+</kw>
+<kw name="Read Until Regexp" library="SSHLibrary">
+<doc>Consumes and returns the server output until a match to ``regexp`` is found.</doc>
+<arguments>
+<arg>[0-9]+</arg>
+</arguments>
+<assign>
+<var>${rc}</var>
+</assign>
+<msg timestamp="20190402 06:51:17.601" level="INFO">0</msg>
+<msg timestamp="20190402 06:51:17.601" level="INFO">${rc} = 0</msg>
+<status status="PASS" endtime="20190402 06:51:17.601" starttime="20190402 06:51:17.600"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${rc}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:17.601" level="INFO">0</msg>
+<status status="PASS" endtime="20190402 06:51:17.601" starttime="20190402 06:51:17.601"></status>
+</kw>
+<msg timestamp="20190402 06:51:17.601" level="INFO">${rc} = 0</msg>
+<status status="PASS" endtime="20190402 06:51:17.601" starttime="20190402 06:51:17.598"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${rc} == 0</arg>
+<arg>Set To Dictionary</arg>
+<arg>${result}</arg>
+<arg>stdout=${output.strip()}</arg>
+<arg>ELSE IF</arg>
+<arg>${fail_if_error} == True</arg>
+<arg>FAIL</arg>
+<arg>${output}</arg>
+<arg>ELSE</arg>
+<arg>Set To Dictionary</arg>
+<arg>${result}</arg>
+<arg>stderr=${output}</arg>
+</arguments>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result}</arg>
+<arg>stdout=${output.strip()}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:17.602" starttime="20190402 06:51:17.602"></status>
+</kw>
+<status status="PASS" endtime="20190402 06:51:17.602" starttime="20190402 06:51:17.602"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result}</arg>
+<arg>rc=${rc}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:17.602" starttime="20190402 06:51:17.602"></status>
+</kw>
+<kw name="Log Dictionary" library="Collections">
+<doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
+<arguments>
+<arg>${result}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:17.603" level="INFO">Dictionary size is 3 and it contains following items:
+rc: 0
+stderr: 
+stdout: 8f070dfb-c440-470d-82d3-8f5f52d7c2a4 enp24s0f1 0000:18:00.1</msg>
+<status status="PASS" endtime="20190402 06:51:17.603" starttime="20190402 06:51:17.603"></status>
+</kw>
+<msg timestamp="20190402 06:51:17.603" level="INFO">${info} = {u'stdout': u'8f070dfb-c440-470d-82d3-8f5f52d7c2a4 enp24s0f1 0000:18:00.1', u'stderr': u'', u'rc': u'0'}</msg>
+<status status="PASS" endtime="20190402 06:51:17.603" starttime="20190402 06:51:16.527"></status>
+</kw>
+<kw name="Convert Response To List" library="Utils">
+<doc>Given a response dictionary, gets the stdout and split
+it by spaces and return it as a list.</doc>
+<arguments>
+<arg>${info}</arg>
+</arguments>
+<assign>
+<var>${info}</var>
+</assign>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${result}</arg>
+<arg>stdout</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20190402 06:51:17.604" level="INFO">${response} = 8f070dfb-c440-470d-82d3-8f5f52d7c2a4 enp24s0f1 0000:18:00.1</msg>
+<status status="PASS" endtime="20190402 06:51:17.604" starttime="20190402 06:51:17.603"></status>
+</kw>
+<kw name="Split String" library="String">
+<doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
+<arguments>
+<arg>${response}</arg>
+</arguments>
+<assign>
+<var>@{res_in_list}</var>
+</assign>
+<msg timestamp="20190402 06:51:17.604" level="INFO">@{res_in_list} = [ 8f070dfb-c440-470d-82d3-8f5f52d7c2a4 | enp24s0f1 | 0000:18:00.1 ]</msg>
+<status status="PASS" endtime="20190402 06:51:17.604" starttime="20190402 06:51:17.604"></status>
+</kw>
+<msg timestamp="20190402 06:51:17.604" level="INFO">${info} = [u'8f070dfb-c440-470d-82d3-8f5f52d7c2a4', u'enp24s0f1', u'0000:18:00.1']</msg>
+<status status="PASS" endtime="20190402 06:51:17.604" starttime="20190402 06:51:17.603"></status>
+</kw>
+<msg timestamp="20190402 06:51:17.604" level="INFO">${iface_info} = [u'8f070dfb-c440-470d-82d3-8f5f52d7c2a4', u'enp24s0f1', u'0000:18:00.1']</msg>
+<status status="PASS" endtime="20190402 06:51:17.604" starttime="20190402 06:51:16.526"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${iface_info}</arg>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${data1portuuid}</var>
+</assign>
+<msg timestamp="20190402 06:51:17.605" level="INFO">${data1portuuid} = 8f070dfb-c440-470d-82d3-8f5f52d7c2a4</msg>
+<status status="PASS" endtime="20190402 06:51:17.605" starttime="20190402 06:51:17.604"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${iface_info}</arg>
+<arg>1</arg>
+</arguments>
+<assign>
+<var>${data1portname}</var>
+</assign>
+<msg timestamp="20190402 06:51:17.605" level="INFO">${data1portname} = enp24s0f1</msg>
+<status status="PASS" endtime="20190402 06:51:17.605" starttime="20190402 06:51:17.605"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${iface_info}</arg>
+<arg>2</arg>
+</arguments>
+<assign>
+<var>${data1pciaddr}</var>
+</assign>
+<msg timestamp="20190402 06:51:17.605" level="INFO">${data1pciaddr} = 0000:18:00.1</msg>
+<status status="PASS" endtime="20190402 06:51:17.605" starttime="20190402 06:51:17.605"></status>
+</kw>
+<kw name="Get Interface UUID" library="Utils">
+<doc>Get Interface id of the specified host and port</doc>
+<arguments>
+<arg>${host}</arg>
+<arg>${data0portname}</arg>
+</arguments>
+<assign>
+<var>${data0ifuuid}</var>
+</assign>
+<kw name="Catenate" library="BuiltIn">
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<arguments>
+<arg>SEPARATOR=|</arg>
+<arg>system host-if-list -a ${host}</arg>
+<arg>grep ${port_name}</arg>
+<arg>awk '{print $2}'</arg>
+</arguments>
+<assign>
+<var>${cmd}</var>
+</assign>
+<msg timestamp="20190402 06:51:17.606" level="INFO">${cmd} = system host-if-list -a controller-0|grep enp24s0f0|awk '{print $2}'</msg>
+<status status="PASS" endtime="20190402 06:51:17.606" starttime="20190402 06:51:17.606"></status>
+</kw>
+<kw name="Run Command" library="Utils">
+<doc>Execute a command on controller over ssh connection
+keeping environment visible to the subsequent keywords.Also allows
+the keyword to fail if there is an error, by default this keyword
+will not fail and will return the stderr.</doc>
+<arguments>
+<arg>${cmd}</arg>
+</arguments>
+<assign>
+<var>${uuid}</var>
+</assign>
+<kw name="Set Client Configuration" library="SSHLibrary">
+<doc>Update the `configuration` of the current connection.</doc>
+<arguments>
+<arg>timeout=${timeout}</arg>
+<arg>prompt=$</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:17.607" starttime="20190402 06:51:17.607"></status>
+</kw>
+<kw name="Create Empy Result Dictionary" library="Utils">
+<doc>Creates an Empty Dictionary with the required structure
+for a response of executed command.</doc>
+<assign>
+<var>&amp;{result}</var>
+</assign>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>stdout=${EMPTY}</arg>
+</arguments>
+<assign>
+<var>&amp;{result_dict}</var>
+</assign>
+<msg timestamp="20190402 06:51:17.607" level="INFO">&amp;{result_dict} = { stdout= }</msg>
+<status status="PASS" endtime="20190402 06:51:17.608" starttime="20190402 06:51:17.607"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result_dict}</arg>
+<arg>stderr=${EMPTY}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:17.608" starttime="20190402 06:51:17.608"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result_dict}</arg>
+<arg>rc=${EMPTY}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:17.608" starttime="20190402 06:51:17.608"></status>
+</kw>
+<msg timestamp="20190402 06:51:17.608" level="INFO">&amp;{result} = { stdout= | stderr= | rc= }</msg>
+<status status="PASS" endtime="20190402 06:51:17.608" starttime="20190402 06:51:17.607"></status>
+</kw>
+<kw name="Read" library="SSHLibrary">
+<doc>Consumes and returns everything available on the server output.</doc>
+<msg timestamp="20190402 06:51:17.609" level="INFO">[wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<status status="PASS" endtime="20190402 06:51:17.609" starttime="20190402 06:51:17.609"></status>
+</kw>
+<kw name="Write" library="SSHLibrary">
+<doc>Writes the given ``text`` on the remote machine and appends a newline.</doc>
+<arguments>
+<arg>${cmd}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:17.623" level="INFO">system host-if-list -a controller-0|gr ep enp24s0f0|awk '{print $2}'</msg>
+<status status="PASS" endtime="20190402 06:51:17.623" starttime="20190402 06:51:17.609"></status>
+</kw>
+<kw name="Read Until Prompt" library="SSHLibrary">
+<doc>Consumes and returns the server output until the prompt is found.</doc>
+<assign>
+<var>${output}</var>
+</assign>
+<msg timestamp="20190402 06:51:18.769" level="INFO">c22463b6-2fe0-479e-b810-8ece7e444a4f
+[wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<msg timestamp="20190402 06:51:18.769" level="INFO">${output} = c22463b6-2fe0-479e-b810-8ece7e444a4f
+[wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<status status="PASS" endtime="20190402 06:51:18.769" starttime="20190402 06:51:17.623"></status>
+</kw>
+<kw name="Remove Prompt Line" library="Utils">
+<doc>On the response of the command execution is also
+retrieved the prompt line (because the use of Read until prompt)
+this keyword delete that last line and returns a clean output.</doc>
+<arguments>
+<arg>${output}</arg>
+</arguments>
+<assign>
+<var>${output}</var>
+</assign>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${output}</arg>
+<arg>-1</arg>
+</arguments>
+<assign>
+<var>${line_to_remove}</var>
+</assign>
+<msg timestamp="20190402 06:51:18.770" level="INFO">${line_to_remove} = [wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<status status="PASS" endtime="20190402 06:51:18.770" starttime="20190402 06:51:18.769"></status>
+</kw>
+<kw name="Remove String" library="String">
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<arguments>
+<arg>${output}</arg>
+<arg>${line_to_remove}</arg>
+</arguments>
+<assign>
+<var>${clean_out}</var>
+</assign>
+<msg timestamp="20190402 06:51:18.770" level="INFO">${clean_out} = c22463b6-2fe0-479e-b810-8ece7e444a4f
+</msg>
+<status status="PASS" endtime="20190402 06:51:18.770" starttime="20190402 06:51:18.770"></status>
+</kw>
+<msg timestamp="20190402 06:51:18.770" level="INFO">${output} = c22463b6-2fe0-479e-b810-8ece7e444a4f
+</msg>
+<status status="PASS" endtime="20190402 06:51:18.770" starttime="20190402 06:51:18.769"></status>
+</kw>
+<kw name="Get Return Code" library="Utils">
+<doc>Wrapper to return the code number of last executed
+command</doc>
+<assign>
+<var>${rc}</var>
+</assign>
+<kw name="Write" library="SSHLibrary">
+<doc>Writes the given ``text`` on the remote machine and appends a newline.</doc>
+<arguments>
+<arg>echo $?</arg>
+</arguments>
+<msg timestamp="20190402 06:51:18.773" level="INFO">echo $?</msg>
+<status status="PASS" endtime="20190402 06:51:18.773" starttime="20190402 06:51:18.770"></status>
+</kw>
+<kw name="Read Until Regexp" library="SSHLibrary">
+<doc>Consumes and returns the server output until a match to ``regexp`` is found.</doc>
+<arguments>
+<arg>[0-9]+</arg>
+</arguments>
+<assign>
+<var>${rc}</var>
+</assign>
+<msg timestamp="20190402 06:51:18.773" level="INFO">0</msg>
+<msg timestamp="20190402 06:51:18.773" level="INFO">${rc} = 0</msg>
+<status status="PASS" endtime="20190402 06:51:18.773" starttime="20190402 06:51:18.773"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${rc}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:18.774" level="INFO">0</msg>
+<status status="PASS" endtime="20190402 06:51:18.774" starttime="20190402 06:51:18.773"></status>
+</kw>
+<msg timestamp="20190402 06:51:18.774" level="INFO">${rc} = 0</msg>
+<status status="PASS" endtime="20190402 06:51:18.774" starttime="20190402 06:51:18.770"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${rc} == 0</arg>
+<arg>Set To Dictionary</arg>
+<arg>${result}</arg>
+<arg>stdout=${output.strip()}</arg>
+<arg>ELSE IF</arg>
+<arg>${fail_if_error} == True</arg>
+<arg>FAIL</arg>
+<arg>${output}</arg>
+<arg>ELSE</arg>
+<arg>Set To Dictionary</arg>
+<arg>${result}</arg>
+<arg>stderr=${output}</arg>
+</arguments>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result}</arg>
+<arg>stdout=${output.strip()}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:18.775" starttime="20190402 06:51:18.774"></status>
+</kw>
+<status status="PASS" endtime="20190402 06:51:18.775" starttime="20190402 06:51:18.774"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result}</arg>
+<arg>rc=${rc}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:18.775" starttime="20190402 06:51:18.775"></status>
+</kw>
+<kw name="Log Dictionary" library="Collections">
+<doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
+<arguments>
+<arg>${result}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:18.775" level="INFO">Dictionary size is 3 and it contains following items:
+rc: 0
+stderr: 
+stdout: c22463b6-2fe0-479e-b810-8ece7e444a4f</msg>
+<status status="PASS" endtime="20190402 06:51:18.775" starttime="20190402 06:51:18.775"></status>
+</kw>
+<msg timestamp="20190402 06:51:18.775" level="INFO">${uuid} = {u'stdout': u'c22463b6-2fe0-479e-b810-8ece7e444a4f', u'stderr': u'', u'rc': u'0'}</msg>
+<status status="PASS" endtime="20190402 06:51:18.775" starttime="20190402 06:51:17.606"></status>
+</kw>
+<msg timestamp="20190402 06:51:18.776" level="INFO">${data0ifuuid} = c22463b6-2fe0-479e-b810-8ece7e444a4f</msg>
+<status status="PASS" endtime="20190402 06:51:18.776" starttime="20190402 06:51:17.606"></status>
+</kw>
+<kw name="Get Interface UUID" library="Utils">
+<doc>Get Interface id of the specified host and port</doc>
+<arguments>
+<arg>${host}</arg>
+<arg>${data1portname}</arg>
+</arguments>
+<assign>
+<var>${data1ifuuid}</var>
+</assign>
+<kw name="Catenate" library="BuiltIn">
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<arguments>
+<arg>SEPARATOR=|</arg>
+<arg>system host-if-list -a ${host}</arg>
+<arg>grep ${port_name}</arg>
+<arg>awk '{print $2}'</arg>
+</arguments>
+<assign>
+<var>${cmd}</var>
+</assign>
+<msg timestamp="20190402 06:51:18.776" level="INFO">${cmd} = system host-if-list -a controller-0|grep enp24s0f1|awk '{print $2}'</msg>
+<status status="PASS" endtime="20190402 06:51:18.776" starttime="20190402 06:51:18.776"></status>
+</kw>
+<kw name="Run Command" library="Utils">
+<doc>Execute a command on controller over ssh connection
+keeping environment visible to the subsequent keywords.Also allows
+the keyword to fail if there is an error, by default this keyword
+will not fail and will return the stderr.</doc>
+<arguments>
+<arg>${cmd}</arg>
+</arguments>
+<assign>
+<var>${uuid}</var>
+</assign>
+<kw name="Set Client Configuration" library="SSHLibrary">
+<doc>Update the `configuration` of the current connection.</doc>
+<arguments>
+<arg>timeout=${timeout}</arg>
+<arg>prompt=$</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:18.778" starttime="20190402 06:51:18.778"></status>
+</kw>
+<kw name="Create Empy Result Dictionary" library="Utils">
+<doc>Creates an Empty Dictionary with the required structure
+for a response of executed command.</doc>
+<assign>
+<var>&amp;{result}</var>
+</assign>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>stdout=${EMPTY}</arg>
+</arguments>
+<assign>
+<var>&amp;{result_dict}</var>
+</assign>
+<msg timestamp="20190402 06:51:18.778" level="INFO">&amp;{result_dict} = { stdout= }</msg>
+<status status="PASS" endtime="20190402 06:51:18.778" starttime="20190402 06:51:18.778"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result_dict}</arg>
+<arg>stderr=${EMPTY}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:18.779" starttime="20190402 06:51:18.779"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result_dict}</arg>
+<arg>rc=${EMPTY}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:18.779" starttime="20190402 06:51:18.779"></status>
+</kw>
+<msg timestamp="20190402 06:51:18.779" level="INFO">&amp;{result} = { stdout= | stderr= | rc= }</msg>
+<status status="PASS" endtime="20190402 06:51:18.779" starttime="20190402 06:51:18.778"></status>
+</kw>
+<kw name="Read" library="SSHLibrary">
+<doc>Consumes and returns everything available on the server output.</doc>
+<msg timestamp="20190402 06:51:18.780" level="INFO">[wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<status status="PASS" endtime="20190402 06:51:18.780" starttime="20190402 06:51:18.779"></status>
+</kw>
+<kw name="Write" library="SSHLibrary">
+<doc>Writes the given ``text`` on the remote machine and appends a newline.</doc>
+<arguments>
+<arg>${cmd}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:18.781" level="INFO">system host-if-list -a controller-0|gr ep enp24s0f1|awk '{print $2}'</msg>
+<status status="PASS" endtime="20190402 06:51:18.781" starttime="20190402 06:51:18.780"></status>
+</kw>
+<kw name="Read Until Prompt" library="SSHLibrary">
+<doc>Consumes and returns the server output until the prompt is found.</doc>
+<assign>
+<var>${output}</var>
+</assign>
+<msg timestamp="20190402 06:51:19.958" level="INFO">f623786d-bcad-4598-90c5-723841b5f6c9
+[wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<msg timestamp="20190402 06:51:19.958" level="INFO">${output} = f623786d-bcad-4598-90c5-723841b5f6c9
+[wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<status status="PASS" endtime="20190402 06:51:19.958" starttime="20190402 06:51:18.781"></status>
+</kw>
+<kw name="Remove Prompt Line" library="Utils">
+<doc>On the response of the command execution is also
+retrieved the prompt line (because the use of Read until prompt)
+this keyword delete that last line and returns a clean output.</doc>
+<arguments>
+<arg>${output}</arg>
+</arguments>
+<assign>
+<var>${output}</var>
+</assign>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${output}</arg>
+<arg>-1</arg>
+</arguments>
+<assign>
+<var>${line_to_remove}</var>
+</assign>
+<msg timestamp="20190402 06:51:19.959" level="INFO">${line_to_remove} = [wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<status status="PASS" endtime="20190402 06:51:19.959" starttime="20190402 06:51:19.959"></status>
+</kw>
+<kw name="Remove String" library="String">
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<arguments>
+<arg>${output}</arg>
+<arg>${line_to_remove}</arg>
+</arguments>
+<assign>
+<var>${clean_out}</var>
+</assign>
+<msg timestamp="20190402 06:51:19.959" level="INFO">${clean_out} = f623786d-bcad-4598-90c5-723841b5f6c9
+</msg>
+<status status="PASS" endtime="20190402 06:51:19.959" starttime="20190402 06:51:19.959"></status>
+</kw>
+<msg timestamp="20190402 06:51:19.960" level="INFO">${output} = f623786d-bcad-4598-90c5-723841b5f6c9
+</msg>
+<status status="PASS" endtime="20190402 06:51:19.960" starttime="20190402 06:51:19.958"></status>
+</kw>
+<kw name="Get Return Code" library="Utils">
+<doc>Wrapper to return the code number of last executed
+command</doc>
+<assign>
+<var>${rc}</var>
+</assign>
+<kw name="Write" library="SSHLibrary">
+<doc>Writes the given ``text`` on the remote machine and appends a newline.</doc>
+<arguments>
+<arg>echo $?</arg>
+</arguments>
+<msg timestamp="20190402 06:51:19.962" level="INFO">echo $?</msg>
+<status status="PASS" endtime="20190402 06:51:19.962" starttime="20190402 06:51:19.960"></status>
+</kw>
+<kw name="Read Until Regexp" library="SSHLibrary">
+<doc>Consumes and returns the server output until a match to ``regexp`` is found.</doc>
+<arguments>
+<arg>[0-9]+</arg>
+</arguments>
+<assign>
+<var>${rc}</var>
+</assign>
+<msg timestamp="20190402 06:51:19.962" level="INFO">0</msg>
+<msg timestamp="20190402 06:51:19.962" level="INFO">${rc} = 0</msg>
+<status status="PASS" endtime="20190402 06:51:19.962" starttime="20190402 06:51:19.962"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${rc}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:19.963" level="INFO">0</msg>
+<status status="PASS" endtime="20190402 06:51:19.963" starttime="20190402 06:51:19.963"></status>
+</kw>
+<msg timestamp="20190402 06:51:19.963" level="INFO">${rc} = 0</msg>
+<status status="PASS" endtime="20190402 06:51:19.963" starttime="20190402 06:51:19.960"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${rc} == 0</arg>
+<arg>Set To Dictionary</arg>
+<arg>${result}</arg>
+<arg>stdout=${output.strip()}</arg>
+<arg>ELSE IF</arg>
+<arg>${fail_if_error} == True</arg>
+<arg>FAIL</arg>
+<arg>${output}</arg>
+<arg>ELSE</arg>
+<arg>Set To Dictionary</arg>
+<arg>${result}</arg>
+<arg>stderr=${output}</arg>
+</arguments>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result}</arg>
+<arg>stdout=${output.strip()}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:19.964" starttime="20190402 06:51:19.963"></status>
+</kw>
+<status status="PASS" endtime="20190402 06:51:19.964" starttime="20190402 06:51:19.963"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result}</arg>
+<arg>rc=${rc}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:19.964" starttime="20190402 06:51:19.964"></status>
+</kw>
+<kw name="Log Dictionary" library="Collections">
+<doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
+<arguments>
+<arg>${result}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:19.964" level="INFO">Dictionary size is 3 and it contains following items:
+rc: 0
+stderr: 
+stdout: f623786d-bcad-4598-90c5-723841b5f6c9</msg>
+<status status="PASS" endtime="20190402 06:51:19.964" starttime="20190402 06:51:19.964"></status>
+</kw>
+<msg timestamp="20190402 06:51:19.965" level="INFO">${uuid} = {u'stdout': u'f623786d-bcad-4598-90c5-723841b5f6c9', u'stderr': u'', u'rc': u'0'}</msg>
+<status status="PASS" endtime="20190402 06:51:19.965" starttime="20190402 06:51:18.776"></status>
+</kw>
+<msg timestamp="20190402 06:51:19.965" level="INFO">${data1ifuuid} = f623786d-bcad-4598-90c5-723841b5f6c9</msg>
+<status status="PASS" endtime="20190402 06:51:19.965" starttime="20190402 06:51:18.776"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${host}'=='controller-0' or '${host}'=='compute-0'</arg>
+<arg>Run Keywords</arg>
+<arg>Run Command</arg>
+<arg>system datanetwork-add ${physnet0} vlan</arg>
+<arg>True</arg>
+<arg>AND</arg>
+<arg>Run Command</arg>
+<arg>system datanetwork-add ${physnet1} vlan</arg>
+<arg>True</arg>
+</arguments>
+<kw name="Run Keywords" library="BuiltIn">
+<doc>Executes all the given keywords in a sequence.</doc>
+<arguments>
+<arg>Run Command</arg>
+<arg>system datanetwork-add ${physnet0} vlan</arg>
+<arg>True</arg>
+<arg>AND</arg>
+<arg>Run Command</arg>
+<arg>system datanetwork-add ${physnet1} vlan</arg>
+<arg>True</arg>
+</arguments>
+<kw name="Run Command" library="Utils">
+<doc>Execute a command on controller over ssh connection
+keeping environment visible to the subsequent keywords.Also allows
+the keyword to fail if there is an error, by default this keyword
+will not fail and will return the stderr.</doc>
+<arguments>
+<arg>system datanetwork-add ${physnet0} vlan</arg>
+<arg>True</arg>
+</arguments>
+<kw name="Set Client Configuration" library="SSHLibrary">
+<doc>Update the `configuration` of the current connection.</doc>
+<arguments>
+<arg>timeout=${timeout}</arg>
+<arg>prompt=$</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:19.966" starttime="20190402 06:51:19.966"></status>
+</kw>
+<kw name="Create Empy Result Dictionary" library="Utils">
+<doc>Creates an Empty Dictionary with the required structure
+for a response of executed command.</doc>
+<assign>
+<var>&amp;{result}</var>
+</assign>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>stdout=${EMPTY}</arg>
+</arguments>
+<assign>
+<var>&amp;{result_dict}</var>
+</assign>
+<msg timestamp="20190402 06:51:19.967" level="INFO">&amp;{result_dict} = { stdout= }</msg>
+<status status="PASS" endtime="20190402 06:51:19.967" starttime="20190402 06:51:19.966"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result_dict}</arg>
+<arg>stderr=${EMPTY}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:19.967" starttime="20190402 06:51:19.967"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${result_dict}</arg>
+<arg>rc=${EMPTY}</arg>
+</arguments>
+<status status="PASS" endtime="20190402 06:51:19.968" starttime="20190402 06:51:19.967"></status>
+</kw>
+<msg timestamp="20190402 06:51:19.968" level="INFO">&amp;{result} = { stdout= | stderr= | rc= }</msg>
+<status status="PASS" endtime="20190402 06:51:19.968" starttime="20190402 06:51:19.966"></status>
+</kw>
+<kw name="Read" library="SSHLibrary">
+<doc>Consumes and returns everything available on the server output.</doc>
+<msg timestamp="20190402 06:51:19.968" level="INFO">[wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<status status="PASS" endtime="20190402 06:51:19.968" starttime="20190402 06:51:19.968"></status>
+</kw>
+<kw name="Write" library="SSHLibrary">
+<doc>Writes the given ``text`` on the remote machine and appends a newline.</doc>
+<arguments>
+<arg>${cmd}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:19.975" level="INFO">system datanetwork-add physnet0 vlan</msg>
+<status status="PASS" endtime="20190402 06:51:19.975" starttime="20190402 06:51:19.968"></status>
+</kw>
+<kw name="Read Until Prompt" library="SSHLibrary">
+<doc>Consumes and returns the server output until the prompt is found.</doc>
+<assign>
+<var>${output}</var>
+</assign>
+<msg timestamp="20190402 06:51:21.012" level="INFO">DataNetwork of name physnet0 already exists.
+[wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<msg timestamp="20190402 06:51:21.012" level="INFO">${output} = DataNetwork of name physnet0 already exists.
+[wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<status status="PASS" endtime="20190402 06:51:21.012" starttime="20190402 06:51:19.975"></status>
+</kw>
+<kw name="Remove Prompt Line" library="Utils">
+<doc>On the response of the command execution is also
+retrieved the prompt line (because the use of Read until prompt)
+this keyword delete that last line and returns a clean output.</doc>
+<arguments>
+<arg>${output}</arg>
+</arguments>
+<assign>
+<var>${output}</var>
+</assign>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${output}</arg>
+<arg>-1</arg>
+</arguments>
+<assign>
+<var>${line_to_remove}</var>
+</assign>
+<msg timestamp="20190402 06:51:21.013" level="INFO">${line_to_remove} = [wrsroot@controller-0 ~(keystone_admin)]$</msg>
+<status status="PASS" endtime="20190402 06:51:21.013" starttime="20190402 06:51:21.013"></status>
+</kw>
+<kw name="Remove String" library="String">
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<arguments>
+<arg>${output}</arg>
+<arg>${line_to_remove}</arg>
+</arguments>
+<assign>
+<var>${clean_out}</var>
+</assign>
+<msg timestamp="20190402 06:51:21.014" level="INFO">${clean_out} = DataNetwork of name physnet0 already exists.
+</msg>
+<status status="PASS" endtime="20190402 06:51:21.014" starttime="20190402 06:51:21.013"></status>
+</kw>
+<msg timestamp="20190402 06:51:21.014" level="INFO">${output} = DataNetwork of name physnet0 already exists.
+</msg>
+<status status="PASS" endtime="20190402 06:51:21.014" starttime="20190402 06:51:21.013"></status>
+</kw>
+<kw name="Get Return Code" library="Utils">
+<doc>Wrapper to return the code number of last executed
+command</doc>
+<assign>
+<var>${rc}</var>
+</assign>
+<kw name="Write" library="SSHLibrary">
+<doc>Writes the given ``text`` on the remote machine and appends a newline.</doc>
+<arguments>
+<arg>echo $?</arg>
+</arguments>
+<msg timestamp="20190402 06:51:21.016" level="INFO">echo $?</msg>
+<status status="PASS" endtime="20190402 06:51:21.016" starttime="20190402 06:51:21.014"></status>
+</kw>
+<kw name="Read Until Regexp" library="SSHLibrary">
+<doc>Consumes and returns the server output until a match to ``regexp`` is found.</doc>
+<arguments>
+<arg>[0-9]+</arg>
+</arguments>
+<assign>
+<var>${rc}</var>
+</assign>
+<msg timestamp="20190402 06:51:21.017" level="INFO">1</msg>
+<msg timestamp="20190402 06:51:21.017" level="INFO">${rc} = 1</msg>
+<status status="PASS" endtime="20190402 06:51:21.017" starttime="20190402 06:51:21.016"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${rc}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:21.017" level="INFO">1</msg>
+<status status="PASS" endtime="20190402 06:51:21.017" starttime="20190402 06:51:21.017"></status>
+</kw>
+<msg timestamp="20190402 06:51:21.017" level="INFO">${rc} = 1</msg>
+<status status="PASS" endtime="20190402 06:51:21.017" starttime="20190402 06:51:21.014"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${rc} == 0</arg>
+<arg>Set To Dictionary</arg>
+<arg>${result}</arg>
+<arg>stdout=${output.strip()}</arg>
+<arg>ELSE IF</arg>
+<arg>${fail_if_error} == True</arg>
+<arg>FAIL</arg>
+<arg>${output}</arg>
+<arg>ELSE</arg>
+<arg>Set To Dictionary</arg>
+<arg>${result}</arg>
+<arg>stderr=${output}</arg>
+</arguments>
+<kw name="Fail" library="BuiltIn">
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<arguments>
+<arg>${output}</arg>
+</arguments>
+<msg timestamp="20190402 06:51:21.018" level="FAIL">DataNetwork of name physnet0 already exists.
+</msg>
+<status status="FAIL" endtime="20190402 06:51:21.018" starttime="20190402 06:51:21.018"></status>
+</kw>
+<status status="FAIL" endtime="20190402 06:51:21.018" starttime="20190402 06:51:21.017"></status>
+</kw>
+<status status="FAIL" endtime="20190402 06:51:21.018" starttime="20190402 06:51:19.966"></status>
+</kw>
+<status status="FAIL" endtime="20190402 06:51:21.018" starttime="20190402 06:51:19.965"></status>
+</kw>
+<status status="FAIL" endtime="20190402 06:51:21.018" starttime="20190402 06:51:19.965"></status>
+</kw>
+<status status="FAIL" endtime="20190402 06:51:21.019" starttime="20190402 06:51:15.470"></status>
+</kw>
+<doc>Validates provisioning of a duplex configuration
+according to steps defined at
+"https://wiki.openstack.org/wiki/StarlingX/Containers/
+InstallationOnAIODX"</doc>
+<tags>
+<tag>Duplex</tag>
+</tags>
+<status status="FAIL" endtime="20190402 06:51:21.019" critical="yes" starttime="20190402 06:51:14.135">DataNetwork of name physnet0 already exists.
+</status>
+</test>
+<doc>Tests for provisioning and unlocking controllers, computes and
+storage hosts.
+Author(s):
+- Jose Perez Carranza &lt;jose.perez.carranza@intel.com&gt;
+- Juan Carlos Alonso &lt;juan.carlos.alonso@intel.com&gt;</doc>
+<metadata>
+<item name="ISO">bootimage.iso</item>
+<item name="System">duplex</item>
+</metadata>
+<status status="FAIL" endtime="20190402 06:51:21.019" starttime="20190402 06:51:12.432"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="1" pass="0">Critical Tests</stat>
+<stat fail="1" pass="0">All Tests</stat>
+</total>
+<tag>
+<stat fail="1" pass="0">Duplex</stat>
+</tag>
+<suite>
+<stat fail="1" id="s1" name="Provision-Containers" pass="0">Provision-Containers</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
